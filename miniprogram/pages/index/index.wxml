@@ -3,33 +3,33 @@
   <view class="header">
     <input class="search" placeholder='搜索'/>
   </view>
-  <scroll-view class="main">
-    <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="5000" circular="true">
-      <swiper-item>
-        <image src="/images/post/post-1@text.jpg" data-post-id='3' />
-      </swiper-item>
-      <swiper-item>
-        <image src="/images/post/post-2@text.jpg" data-post-id='4' />
-      </swiper-item>
-      <swiper-item>
-        <image src="/images/post/post-3@text.jpg" data-post-id='5' />
-      </swiper-item>
-    </swiper>
-    <view class="post-container" wx:for="{{posts}}" wx:key="{{item._id}}">
-      <view class="post-author-date">
-        <image src="{{avatar}}" />
-        <text>{{date}}</text>
-      </view>
-      <text class="post-title">{{title}}</text>
-      <image class="post-image" src="{{postImg}}" mode="aspectFill" />
-      <text class="post-content">{{content}}</text>
-      <view class="post-like">
-        <image src="/images/icon/wx_app_collect.png" />
-        <text>{{collectionNum}}</text>
-        <image src="/images/icon/wx_app_view.png"></image>
-        <text>{{readingNum}}</text>
-        <image src="/images/icon/wx_app_message.png"></image>
-        <text>{{commentNum}}</text>
+  <scroll-view class="main-scroll" scroll-y="true">
+    <view class="main">
+      <swiper catchtap="onSwiperTapToDetail" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="5000" circular="true">
+        <swiper-item wx:for="{{banners}}" wx:key="{{item.banner}}">
+          <image src="{{item.post_img}}" data-post-id="{{item._id}}" />
+        </swiper-item>
+      </swiper>
+      <view class="post-container" 
+            wx:for="{{posts}}" 
+            wx:key="{{item._id}}" 
+            catchtap="onPostTapToDetail"
+            data-post-id="{{item._id}}">
+        <view class="post-author-date">
+          <image src="{{item.organizer_img}}" />
+          <text>发布于: {{item.post_time}}</text>
+        </view>
+        <text class="post-title">{{item.title}}</text>
+        <image class="post-image" src="{{item.post_img}}" mode="aspectFill" />
+        <text class="post-content">{{item.content}}</text>
+        <view class="post-like">
+          <image src="/images/icon/wx_app_collect.png" />
+          <text>{{item.collection_num}}</text>
+          <image src="/images/icon/wx_app_view.png"></image>
+          <text>{{item.reading_num}}</text>
+          <image src="/images/icon/wx_app_message.png"></image>
+          <text>{{item.comment_num}}</text>
+        </view>
       </view>
     </view>
   </scroll-view>

@@ -1,6 +1,8 @@
 /**index.wxss**/
 .header{
+  position: fixed;
   width: 100%;
+  height: 150rpx;
   background-color: #2be2d0;
   margin-bottom: 20rpx;
 }
@@ -13,8 +15,14 @@
   margin: 30rpx auto;
 }
 
-.main{
+.main-scroll{
   width: 100%;
+  position: fixed;
+  top: 150rpx;
+  height: calc(100% - 150rpx);
+}
+.main{
+  min-height: calc(100% - 150rpx);
 }
 swiper{
   width:100%;
@@ -44,7 +52,9 @@ swiper image{
 .post-author-date image{
     width:60rpx;
     height:60rpx;
+    border-radius: 50%;
 }
+
 .post-author-date text{
     margin-left: 20px;
 }
