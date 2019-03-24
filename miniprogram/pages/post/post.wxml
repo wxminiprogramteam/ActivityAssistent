@@ -1,0 +1,11 @@
+<!--pages/post/post.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="header-caption">{{post.title}}</text>
+    <text>{{post.time}}</text>
+    <text>{{post.place}}</text>
+  </view>
+  <view>
+  {{post.content}}
+  </view>
+</view>

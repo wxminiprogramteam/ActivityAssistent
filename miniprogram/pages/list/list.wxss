@@ -1,0 +1,60 @@
+/**index.wxss**/
+.header{
+  width: 100%;
+  background-color: #2be2d0;
+  margin-bottom: 20rpx;
+}
+.search{
+  width: 90%;
+  border: 1px solid white;
+  border-radius: 30rpx;
+  background-color: white;
+  padding: 5rpx 10rpx;
+  margin: 30rpx auto;
+}
+
+.main{
+  width: 100%;
+}
+.main-caption{
+  width: 90%;
+  margin: 0rpx 5%;
+  padding: 0rpx 15rpx;
+  border-left: 3px solid #2be2d0;
+}
+.activity{
+  display: flex;
+  width: 90%;
+  height: 200rpx;
+  margin: 0px 5%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid #ddd;
+}
+.activity-img-box{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+}
+.activity-img{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.activity-text-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 50rpx;
+}
+.activity-text-caption{
+  font-size: 40rpx;
+  font-weight: 300;
+}
+.activity-text-content{
+  font-size: 30rpx;
+  color: #777;
+  margin-top: 10rpx;
+}

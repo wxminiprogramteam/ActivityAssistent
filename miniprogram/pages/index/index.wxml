@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="header">
+    <input class="search" placeholder='搜索'/>
+  </view>
+  <scroll-view class="main">
+    <swiper catchtap="onSwiperTap" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="5000" circular="true">
+      <swiper-item>
+        <image src="/images/post/post-1@text.jpg" data-post-id='3' />
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/post/post-2@text.jpg" data-post-id='4' />
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/post/post-3@text.jpg" data-post-id='5' />
+      </swiper-item>
+    </swiper>
+    <view class="post-container" wx:for="{{posts}}" wx:key="{{item._id}}">
+      <view class="post-author-date">
+        <image src="{{avatar}}" />
+        <text>{{date}}</text>
+      </view>
+      <text class="post-title">{{title}}</text>
+      <image class="post-image" src="{{postImg}}" mode="aspectFill" />
+      <text class="post-content">{{content}}</text>
+      <view class="post-like">
+        <image src="/images/icon/wx_app_collect.png" />
+        <text>{{collectionNum}}</text>
+        <image src="/images/icon/wx_app_view.png"></image>
+        <text>{{readingNum}}</text>
+        <image src="/images/icon/wx_app_message.png"></image>
+        <text>{{commentNum}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

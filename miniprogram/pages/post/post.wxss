@@ -1,0 +1,14 @@
+/* pages/post/post.wxss */
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  padding: 30rpx 0rpx;
+}
+.header-caption{
+  font-size: 50rpx;
+  font-weight: bold;
+}
