@@ -2,24 +2,26 @@ var app = getApp();
 
 Page({
   data: {
-    isPlayingMusic: false
+    isloading: true,
+    post:{}
   },
   onLoad: function (options) {
     var id = options.id;
-    this.dbPost = new DBPost(postId);
-    this.postData = this.dbPost.getPostItemById().data;
-    this.setData({
-      post: this.postData
-    })
-    this.addReadingTimes();
-    this.setMusicMonitor();
-    this.initMusicStatus();
-    this.setAniation();
-  },
-
-  onReady: function () {
-    wx.setNavigationBarTitle({
-      title: this.postData.title
+    var that = this;
+    console.log(id);
+    wx.getStorage({
+      key: id,
+      success(res){
+        console.log(res.data);
+        that.setData({
+          post: res.data
+        })
+        setTimeout(function () {
+          that.setData({
+            isloading: false
+          })
+        }, 1000)
+      }
     })
   },
 
@@ -32,22 +34,6 @@ Page({
     this.animationUp = animationUp
   },
 
-  initMusicStatus() {
-    var currentPostId = this.postData.postId;
-    if (app.globalData.g_isPlayingMusic &&
-      app.globalData.g_currentMusicPostId === currentPostId) {
-
-      // 如果全局播放的音乐是当前文章的的音乐，才将图标状态设置为正在播放
-      this.setData({
-        isPlayingMusic: true
-      })
-    }
-    else {
-      this.setData({
-        isPlayingMusic: false
-      })
-    }
-  },
 
   onCollectionTap: function (event) {
     var newData = this.dbPost.collect();

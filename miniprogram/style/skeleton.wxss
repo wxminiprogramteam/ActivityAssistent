@@ -1,0 +1,5 @@
+.skeleton{
+  /* padding: 5px 0; */
+	background: #F1F2F3;
+  color: #F1F2F3 !important;
+}

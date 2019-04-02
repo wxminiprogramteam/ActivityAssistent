@@ -1,4 +1,4 @@
-// pages/classify/classify.js
+// pages/catagroy/list/list.js
 Page({
 
   /**

@@ -1,23 +1,25 @@
+@import"../../style/skeleton.wxss";
+
 .container {
   display: flex;
   flex-direction: column;
 }
 
-.head-image {
+.post-head-image {
   width: 750rpx;
   height: 460rpx;
 }
 
-.title {
+.post-title {
   font-size: 20px;
   margin: 30rpx;
   letter-spacing: 2px;
   color: #4b556c;
 }
 
-.author-date {
+.post-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-top: 15rpx;
   margin-left: 30rpx;
   align-items: center;
@@ -25,26 +27,26 @@
   font-size:13px;
 }
 
-.author-box {
+.post-info-organizer {
   display:flex;
   flex-direction: row;
   align-items: center;
 }
 
-.avatar {
+.post-info-organizer-img {
   height: 50rpx;
   width: 50rpx;
+  border-radius: 50%;
 }
 
-.author {
+.post-info-organizer-name {
   font-weight: 300;
   margin-left: 20rpx;
   color: #666;
 }
 
-.date {
+.post-info-time, .post-info-place {
   color: #919191;
-  margin-right: 38rpx;
 }
 
 
@@ -63,6 +65,8 @@
   margin: 20rpx 28rpx 20rpx 0;
   display: flex;
   justify-content: center;
+  color: #999;
+  font-size: 35rpx;
 }
 .tool-item{
   align-items: center;
@@ -81,7 +85,7 @@
 }
 
 .comment image{
-  transform: scale(.85);
+  /* transform: scale(.85); */
 }
 
 .music {

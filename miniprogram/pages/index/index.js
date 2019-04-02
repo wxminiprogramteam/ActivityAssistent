@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    isloading: true,
     posts: [],
     banners: []
   },
@@ -31,20 +32,21 @@ Page({
     db.collection('post').get({
       success(res) {
         // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-        console.log(res.data);
+        // console.log(res.data);
         that.setData({
-          posts: res.data
+          posts: res.data,
         })
-        console.log(that.data.posts);
-        wx.setStorage({
-          key: 'posts',
-          data: that.data.posts
-        })
-        wx.getStorage({
-          key: 'posts',
-          success(res) {
-            console.log(res.data)
-          }
+        setTimeout(function(){
+          that.setData({
+            isloading: false
+          })
+        },1000)
+        that.data.posts.map(function (currentValue, index, arr) {
+          // console.log(currentValue);
+          wx.setStorage({
+            key: currentValue._id,
+            data: currentValue
+          })
         })
       }
     })
@@ -53,9 +55,9 @@ Page({
 
   onPostTapToDetail(event) {
     var postId = event.currentTarget.dataset.postId;
-    console.log(postId);
+    // console.log(postId);
     wx.navigateTo({
-      url: '/pages/post/post?id=' + postId,
+      url: '/pages/detail/detail?id=' + postId,
     })
   },
 
@@ -65,7 +67,7 @@ Page({
   onSwiperTapToDetail: function (event) {
     var postId = event.target.dataset.postId;
     wx.navigateTo({
-      url: "/pages/post/post?id=" + postId
+      url: "/pages/detail/detail?id=" + postId
     })
   }
 })

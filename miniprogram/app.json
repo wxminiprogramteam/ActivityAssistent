@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/classify/classify",
+    "pages/catagroy/catagroy",
+    "pages/catagroy/list/list",
     "pages/mine/mine",
-    "pages/post/post",
-    "pages/list/list"
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,7 +23,7 @@
         "selectedIconPath": "images/homeSelected.png"
       },
       {
-        "pagePath": "pages/classify/classify",
+        "pagePath": "pages/catagroy/catagroy",
         "text": "分类",
         "iconPath": "images/tags.png",
         "selectedIconPath": "images/tagsSelected.png"

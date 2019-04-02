@@ -5,8 +5,19 @@
   </view>
   <scroll-view class="main-scroll" scroll-y="true">
     <view class="main">
-      <swiper catchtap="onSwiperTapToDetail" vertical="{{false}}"  indicator-dots="true" autoplay="true" interval="5000" circular="true">
-        <swiper-item wx:for="{{banners}}" wx:key="{{item.banner}}">
+      <swiper 
+        catchtap="onSwiperTapToDetail" 
+        vertical="{{false}}"  
+        indicator-dots="true" 
+        autoplay="true" 
+        interval="5000" 
+        circular="true"
+      >
+        <swiper-item 
+          wx:for="{{banners}}" 
+          wx:key="{{item.banner}}" 
+          class="{{isloading == true ? 'skeleton':''}}"
+        >
           <image src="{{item.post_img}}" data-post-id="{{item._id}}" />
         </swiper-item>
       </swiper>
@@ -15,20 +26,32 @@
             wx:key="{{item._id}}" 
             catchtap="onPostTapToDetail"
             data-post-id="{{item._id}}">
-        <view class="post-author-date">
-          <image src="{{item.organizer_img}}" />
-          <text>发布于: {{item.post_time}}</text>
+        <view class="post-info">
+          <view class="post-info-organizer">
+            <image 
+              class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
+              src="{{item.organizer_img}}" 
+            />
+            <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
+              <text>{{item.organizer}}</text>
+            </view>
+          </view>
+          <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
+            <text>发布于: {{item.post_time}}</text>
+          </view>
         </view>
-        <text class="post-title">{{item.title}}</text>
-        <image class="post-image" src="{{item.post_img}}" mode="aspectFill" />
-        <text class="post-content">{{item.content}}</text>
+        <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
+        <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.post_img}}" mode="aspectFill" />
+        <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
         <view class="post-like">
-          <image src="/images/icon/wx_app_collect.png" />
-          <text>{{item.collection_num}}</text>
           <image src="/images/icon/wx_app_view.png"></image>
-          <text>{{item.reading_num}}</text>
+          <text class="{{isloading == true ? 'skeleton':''}}">{{item.reading_num}}</text>
+          <image src="/images/icon/wx_app_like.png"></image>
+          <text class="{{isloading == true ? 'skeleton':''}}">{{item.up_num}}</text>
+          <image src="/images/icon/wx_app_collect.png" />
+          <text class="{{isloading == true ? 'skeleton':''}}">{{item.collection_num}}</text>
           <image src="/images/icon/wx_app_message.png"></image>
-          <text>{{item.comment_num}}</text>
+          <text class="{{isloading == true ? 'skeleton':''}}">{{item.comment_num}}</text>
         </view>
       </view>
     </view>
