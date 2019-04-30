@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="header">
-    <input class="search" placeholder='搜索'/>
+    <input bindtap='tapToSearch' class="search" placeholder='搜索'/>
   </view>
   <scroll-view class="main-scroll" scroll-y="true">
     <view class="main">

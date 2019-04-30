@@ -70,5 +70,10 @@ Page({
     wx.navigateTo({
       url: "/pages/detail/detail?id=" + postId
     })
+  },
+  tapToSearch: function(){
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
   }
 })

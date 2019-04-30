@@ -10,7 +10,7 @@
 	},
 	"appid": "wx1209e1bcf72d6984",
 	"projectname": "ActivityAssistent",
-	"libVersion": "2.2.5",
+	"libVersion": "2.6.6",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -47,6 +47,13 @@
 					"id": -1,
 					"name": "mine",
 					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
 					"scene": null
 				}
 			]

@@ -1,0 +1,26 @@
+<!--pages/search/search.wxml-->
+<view class="container">
+  <view class="header">
+    <input 
+      class="search" 
+      placeholder='搜索'
+      focus
+      confirm-type='search'
+      bindinput='inputSearch'
+    />
+  </view>
+  <scroll-view class="main-scroll" scroll-y="true">
+    <view class='main'>
+      <view 
+        class="main-item" 
+        wx:for="{{items}}" 
+        wx:key="{{item._id}}" 
+        bindtap='tapToDetail'         
+        data-post-id="{{item._id}}"
+      >
+        <image class="main-item-img" src='{{item.organizerImg}}'></image>
+        <text class="main-item-text">{{item.title}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
