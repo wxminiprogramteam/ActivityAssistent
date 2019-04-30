@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "post-card": "../../../components/post-card/post-card"
+  },
+  "navigationBarTitleText": "我的收藏"
 }

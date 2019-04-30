@@ -1,2 +1,19 @@
-<!--pages/mine/collection/collection.wxml-->
-<text>pages/mine/collection/collection.wxml</text>
+<!--pages/mine/up/up.wxml-->
+<view class="container">
+  <view bindtap="tapHeader" class="header">
+    <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
+  </view>
+  <view class='main'>
+    <!-- Component post-card 文章简介卡片 -->
+      <post-card
+        wx:for="{{posts}}" 
+        wx:key="{{item._id}}" 
+        catchtap="onPostTapToDetail"
+        data-post-id="{{item._id}}"
+        item="{{item}}"
+        isloading="{{isloading}}"
+      >
+      </post-card>
+      <!-- end: Component post-card 文章简介卡片 -->
+  </view>
+</view>

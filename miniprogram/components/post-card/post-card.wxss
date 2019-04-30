@@ -1,0 +1,87 @@
+/* components/post-card/post-card.wxss */
+@import"../../style/skeleton.wxss";
+
+.post-container{
+    flex-direction:column;
+    display:flex;
+    margin:20rpx 0 40rpx;
+    background-color:#fff;
+    border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    padding-bottom: 5px;
+}
+
+.post-info{
+  width: 740rpx;
+  height: 80rpx;
+  margin: 10rpx 0 20rpx 10rpx;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #999;
+  font-size: 30rpx;
+}
+.post-info-organizer{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80rpx;
+  flex: 1;
+}
+.post-info-organizer-img{
+  width:60rpx;
+  height:60rpx;
+  border-radius: 50%;
+}
+.post-info-organizer-text{
+  margin-left: 10rpx;
+}
+.post-info-time{
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.post-image{
+    width:100%;
+    height:340rpx;
+    margin-bottom: 15px;
+}
+
+.post-date{
+    font-size:26rpx;
+    margin-bottom: 10px;
+}
+.post-title{
+    font-size:16px;
+    font-weight: 600;
+    color:#333;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.post-content{
+    color:#666;
+    font-size:26rpx;
+    margin-bottom:20rpx;
+    margin-left: 20rpx;
+    letter-spacing:2rpx;
+    line-height: 40rpx;
+}
+.post-like{
+    display:flex;
+    flex-direction: row;
+    font-size:13px;
+    line-height: 16px;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.post-like image{
+    height:16px;
+    width:16px;
+    margin-right: 8px;
+}
+
+.post-like text{
+    margin-right: 20px;
+}

@@ -8,7 +8,8 @@ Page({
     posts: [],
     banners: []
   },
-  onLoad: function (options) {
+  //后期要优化onLoad和onShow
+  onShow: function (options) {
     //注意： 在下面获取数据库数据的api的回调函数中，this会变，因此要在此处将当前的this保存下来
     var that = this;
 

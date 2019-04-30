@@ -42,30 +42,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    //开启欢迎文字动画
     setInterval(this.tapHeader, 5000);
 
-    //获取已喜欢的文章
-    // db.collection('user').get({
-    //   success(res) {
-    //     // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-    //     // console.log(res.data);
-    //     that.setData({
-    //       posts: res.data,
-    //     })
-    //     setTimeout(function () {
-    //       that.setData({
-    //         isloading: false
-    //       })
-    //     }, 1000)
-    //     that.data.posts.map(function (currentValue, index, arr) {
-    //       // console.log(currentValue);
-    //       wx.setStorage({
-    //         key: currentValue._id,
-    //         data: currentValue
-    //       })
-    //     })
-    //   }
-    // })
+    //获取已喜欢的文章(暂时定为直接从缓存中获取)
+    wx.getStorage({
+      key: 'currentUser',
+      success: function(res) {
+        //得到用户已喜欢文章的id数组
+        let upPosts = res.data.upPosts;
+        // console.log(JSON.stringify(res.data.upPosts));
+        //遍历upPosts数组，根据文章id从缓存中获取文章详细信息
+        let posts = [];
+        for(let i=0; i < upPosts.length; i ++){
+          var post = wx.getStorageSync(upPosts[i]);
+          posts.push(post);
+        }
+        that.setData({
+          posts: posts,
+          isloading: false
+        })
+      },
+    })
+    
   },
 
   /**

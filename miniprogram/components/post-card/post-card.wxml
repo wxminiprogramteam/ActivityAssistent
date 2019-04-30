@@ -1,0 +1,36 @@
+<!--components/post-card/post-card.wxml-->
+<view 
+  class="post-container" 
+  data-post-id="{{item._id}}"
+>
+  <!-- 文章卡片头部 -->
+  <view class="post-info">
+    <view class="post-info-organizer">
+      <image 
+        class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
+        src="{{item.organizerImg}}" 
+      />
+      <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
+        <text>{{item.organizer}}{{text}}</text>
+      </view>
+    </view>
+    <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
+      <text>发布于: {{item.postTime}}</text>
+    </view>
+  </view>
+  <!-- 文章卡片主体内容 -->
+  <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
+  <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.postImg}}" mode="aspectFill" />
+  <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
+  <!-- 文章卡片底部信息 -->
+  <view class="post-like">
+    <image src="/images/icon/wx_app_view.png"></image>
+    <text class="{{isloading == true ? 'skeleton':''}}">{{item.readingNum}}</text>
+    <image src="/images/icon/wx_app_like.png"></image>
+    <text class="{{isloading == true ? 'skeleton':''}}">{{item.upNum}}</text>
+    <image src="/images/icon/wx_app_collect.png" />
+    <text class="{{isloading == true ? 'skeleton':''}}">{{item.collectionNum}}</text>
+    <image src="/images/icon/wx_app_message.png"></image>
+    <text class="{{isloading == true ? 'skeleton':''}}">{{item.commentNum}}</text>
+  </view>
+</view>

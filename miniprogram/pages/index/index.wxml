@@ -21,39 +21,18 @@
           <image src="{{item.postImg}}" data-post-id="{{item._id}}" />
         </swiper-item>
       </swiper>
-      <view class="post-container" 
-            wx:for="{{posts}}" 
-            wx:key="{{item._id}}" 
-            catchtap="onPostTapToDetail"
-            data-post-id="{{item._id}}">
-        <view class="post-info">
-          <view class="post-info-organizer">
-            <image 
-              class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
-              src="{{item.organizerImg}}" 
-            />
-            <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
-              <text>{{item.organizer}}</text>
-            </view>
-          </view>
-          <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
-            <text>发布于: {{item.postTime}}</text>
-          </view>
-        </view>
-        <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
-        <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.postImg}}" mode="aspectFill" />
-        <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
-        <view class="post-like">
-          <image src="/images/icon/wx_app_view.png"></image>
-          <text class="{{isloading == true ? 'skeleton':''}}">{{item.readingNum}}</text>
-          <image src="/images/icon/wx_app_like.png"></image>
-          <text class="{{isloading == true ? 'skeleton':''}}">{{item.upNum}}</text>
-          <image src="/images/icon/wx_app_collect.png" />
-          <text class="{{isloading == true ? 'skeleton':''}}">{{item.collectionNum}}</text>
-          <image src="/images/icon/wx_app_message.png"></image>
-          <text class="{{isloading == true ? 'skeleton':''}}">{{item.commentNum}}</text>
-        </view>
-      </view>
+
+      <!-- Component post-card 文章简介卡片 -->
+      <post-card
+        wx:for="{{posts}}" 
+        wx:key="{{item._id}}" 
+        catchtap="onPostTapToDetail"
+        data-post-id="{{item._id}}"
+        item="{{item}}"
+        isloading="{{isloading}}"
+      >
+      </post-card>
+      <!-- end: Component post-card 文章简介卡片 -->
     </view>
   </scroll-view>
 </view>

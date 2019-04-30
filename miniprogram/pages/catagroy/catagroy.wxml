@@ -21,153 +21,65 @@
       <!-- 理论研究 -->
 			<swiper-item class="swiper-item">
 				<scroll-view class="swiper-item-scroll" scroll-y>
-					<view class="post-container" 
+          <!-- Component post-card 文章简介卡片 -->
+          <post-card
             wx:for="{{lilun}}" 
             wx:key="{{item._id}}" 
             catchtap="onPostTapToDetail"
-            data-post-id="{{item._id}}">
-          <view class="post-info">
-            <view class="post-info-organizer">
-              <image 
-                class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
-                src="{{item.organizer_img}}" 
-              />
-              <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
-                <text>{{item.organizer}}</text>
-              </view>
-            </view>
-            <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
-              <text>发布于: {{item.post_time}}</text>
-            </view>
-          </view>
-          <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
-          <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.post_img}}" mode="aspectFill" />
-          <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
-          <view class="post-like">
-            <image src="/images/icon/wx_app_view.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.reading_num}}</text>
-            <image src="/images/icon/wx_app_like.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.up_num}}</text>
-            <image src="/images/icon/wx_app_collect.png" />
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.collection_num}}</text>
-            <image src="/images/icon/wx_app_message.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.comment_num}}</text>
-          </view>
-        </view>
+            data-post-id="{{item._id}}"
+            item="{{item}}"
+            isloading="{{isloading}}"
+          >
+          </post-card>
+          <!-- end: Component post-card 文章简介卡片 -->
 				</scroll-view>
 			</swiper-item>
       <!-- 志愿活动 -->
       <swiper-item class="society-swiper-item">
 				<scroll-view class="society-swiper-item-scroll" scroll-y>
-					<view class="post-container" 
+					<!-- Component post-card 文章简介卡片 -->
+          <post-card
             wx:for="{{zhiyuan}}" 
             wx:key="{{item._id}}" 
             catchtap="onPostTapToDetail"
-            data-post-id="{{item._id}}">
-          <view class="post-info">
-            <view class="post-info-organizer">
-              <image 
-                class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
-                src="{{item.organizer_img}}" 
-              />
-              <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
-                <text>{{item.organizer}}</text>
-              </view>
-            </view>
-            <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
-              <text>发布于: {{item.post_time}}</text>
-            </view>
-          </view>
-          <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
-          <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.post_img}}" mode="aspectFill" />
-          <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
-          <view class="post-like">
-            <image src="/images/icon/wx_app_view.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.reading_num}}</text>
-            <image src="/images/icon/wx_app_like.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.up_num}}</text>
-            <image src="/images/icon/wx_app_collect.png" />
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.collection_num}}</text>
-            <image src="/images/icon/wx_app_message.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.comment_num}}</text>
-          </view>
-        </view>
+            data-post-id="{{item._id}}"
+            item="{{item}}"
+            isloading="{{isloading}}"
+          >
+          </post-card>
+          <!-- end: Component post-card 文章简介卡片 -->
 				</scroll-view>
 			</swiper-item>
       <!-- 体育竞技 -->
       <swiper-item class="society-swiper-item">
 				<scroll-view class="society-swiper-item-scroll" scroll-y>
-					<view class="post-container" 
+					<!-- Component post-card 文章简介卡片 -->
+          <post-card
             wx:for="{{tiyu}}" 
             wx:key="{{item._id}}" 
             catchtap="onPostTapToDetail"
-            data-post-id="{{item._id}}">
-            <view class="post-info">
-              <view class="post-info-organizer">
-                <image 
-                  class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
-                  src="{{item.organizer_img}}" 
-                />
-                <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
-                  <text>{{item.organizer}}</text>
-                </view>
-              </view>
-              <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
-                <text>发布于: {{item.post_time}}</text>
-              </view>
-            </view>
-            <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
-            <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.post_img}}" mode="aspectFill" />
-            <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
-            <view class="post-like">
-              <image src="/images/icon/wx_app_view.png"></image>
-              <text class="{{isloading == true ? 'skeleton':''}}">{{item.reading_num}}</text>
-              <image src="/images/icon/wx_app_like.png"></image>
-              <text class="{{isloading == true ? 'skeleton':''}}">{{item.up_num}}</text>
-              <image src="/images/icon/wx_app_collect.png" />
-              <text class="{{isloading == true ? 'skeleton':''}}">{{item.collection_num}}</text>
-              <image src="/images/icon/wx_app_message.png"></image>
-              <text class="{{isloading == true ? 'skeleton':''}}">{{item.comment_num}}</text>
-            </view>
-          </view>
+            data-post-id="{{item._id}}"
+            item="{{item}}"
+            isloading="{{isloading}}"
+          >
+          </post-card>
+          <!-- end: Component post-card 文章简介卡片 -->
 				</scroll-view>
 			</swiper-item>
       <!-- 文化艺术 -->
       <swiper-item class="society-swiper-item">
 				<scroll-view class="society-swiper-item-scroll" scroll-y>
-					<view class="post-container" 
+					<!-- Component post-card 文章简介卡片 -->
+          <post-card
             wx:for="{{wenhua}}" 
             wx:key="{{item._id}}" 
             catchtap="onPostTapToDetail"
-            data-post-id="{{item._id}}">
-          <view class="post-info">
-            <view class="post-info-organizer">
-              <image 
-                class="post-info-organizer-img {{isloading == true ? 'skeleton':''}}" 
-                src="{{item.organizer_img}}" 
-              />
-              <view class="post-info-organizer-text {{isloading == true ? 'skeleton':''}}">
-                <text>{{item.organizer}}</text>
-              </view>
-            </view>
-            <view class="post-info-time {{isloading == true ? 'skeleton':''}}">
-              <text>发布于: {{item.post_time}}</text>
-            </view>
-          </view>
-          <text class="post-title {{isloading == true ? 'skeleton':''}}">{{item.title}}</text>
-          <image class="post-image {{isloading == true ? 'skeleton':''}}" src="{{item.post_img}}" mode="aspectFill" />
-          <text class="post-content {{isloading == true ? 'skeleton':''}}">{{item.content}}</text>
-          <view class="post-like">
-            <image src="/images/icon/wx_app_view.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.reading_num}}</text>
-            <image src="/images/icon/wx_app_like.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.up_num}}</text>
-            <image src="/images/icon/wx_app_collect.png" />
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.collection_num}}</text>
-            <image src="/images/icon/wx_app_message.png"></image>
-            <text class="{{isloading == true ? 'skeleton':''}}">{{item.comment_num}}</text>
-          </view>
-        </view>
+            data-post-id="{{item._id}}"
+            item="{{item}}"
+            isloading="{{isloading}}"
+          >
+          </post-card>
+          <!-- end: Component post-card 文章简介卡片 -->
 				</scroll-view>
 			</swiper-item>
 		</swiper>
