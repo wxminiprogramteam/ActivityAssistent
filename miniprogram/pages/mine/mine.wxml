@@ -1,2 +1,48 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="container">
+  <view bindtap="tapHeader" class="header">
+    <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
+  </view>
+  <view class='main'>
+    <view class='main-header'>
+      <image bindtap="changeAvatar" class='main-header-avatar' src="{{isLogin?userInfo.avatarUrl : '../../images/user.png'}}"></image>
+      <view class='main-header-info' wx:if="{{isLogin}}">
+        <text class='main-header-info-name'>{{userInfo.name}}</text>
+        <text class='main-header-info-sNumber'>学号：{{userInfo.sNumber}}</text>
+      </view>
+      <button wx:else bindtap="tapLogin">
+        <text>点击登录</text>
+      </button>
+    </view>
+    <view class='main-main'>
+      <view bindtap='tapToUp' class='main-main-item'>
+        <image class='main-main-item-icon' src="../../images/star.png"></image>
+        <text class='main-main-item-text'>我的喜欢</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
+      <view bindtap='tapToCollection' class='main-main-item'>
+        <image class='main-main-item-icon' src="../../images/star.png"></image>
+        <text class='main-main-item-text'>我的收藏</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
+      <view class='main-main-item'>
+        <image class='main-main-item-icon' src="../../images/star.png"></image>
+        <text class='main-main-item-text'>我的评论</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
+      <view class='main-main-item'>
+        <image class='main-main-item-icon' src="../../images/unordered list.png"></image>
+        <text class='main-main-item-text'>报名记录</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
+      <view class='main-main-item'>
+        <image class='main-main-item-icon' src='../../images/calendar-check.png'></image>
+        <text class='main-main-item-text'>历史记录</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
+    </view>
+    <view bindtap='logout' class='logout-btn-box' wx:if="{{isLogin}}" >
+      <button class="logout-btn">退出</button>
+    </view>
+  </view>
+</view>

@@ -1,13 +1,13 @@
 <view class="container">
-  <image class="post-head-image  {{isloading == true ? 'skeleton':''}}" src="{{post.post_img}}"></image>
+  <image class="post-head-image  {{isloading == true ? 'skeleton':''}}" src="{{post.postImg}}"></image>
   <text class="post-title  {{isloading == true ? 'skeleton':''}}">{{post.title}}</text>
   <view class="post-info">
     <view class="post-info-organizer">
-      <image class="post-info-organizer-img  {{isloading == true ? 'skeleton':''}}" src="{{post.organizer_img}}"></image>
+      <image class="post-info-organizer-img  {{isloading == true ? 'skeleton':''}}" src="{{post.organizerImg}}"></image>
       <text class="post-info-organizer-name  {{isloading == true ? 'skeleton':''}}">{{post.organizer}}</text>
     </view>
     <view class="post-info-time  {{isloading == true ? 'skeleton':''}}">
-      <text>活动时间: {{post.activity_time}}</text>
+      <text>活动时间: {{post.activityTime}}</text>
     </view>
     <view class="post-info-place  {{isloading == true ? 'skeleton':''}}">
       <text>活动地点: {{post.place}}</text>
@@ -17,17 +17,17 @@
 </view>
 <view class="tool">
   <view class="tool-item" catchtap="onUpTap" data-post-id="{{post._id}}">
-     <image animation="{{animationUp}}" wx:if="{{post.up_status}}" src="/images/icon/wx_app_liked.png" />
+     <image animation="{{animationUp}}" wx:if="{{upStatus}}" src="/images/icon/wx_app_liked.png" />
      <image animation="{{animationUp}}" wx:else src="/images/icon/wx_app_like.png" />
-    <text  class="{{isloading == true ? 'skeleton':''}}">{{post.up_num}}</text>
+    <text  class="{{isloading == true ? 'skeleton':''}} {{upStatus?'tool-item-text-activated':''}}">{{upStatus?'已':''}}喜欢{{post.upNum}}</text>
+  </view>
+  <view class="tool-item" catchtap="onCollectionTap" data-post-id="{{post._id}}">
+    <image wx:if="{{collectionStatus}}" src="/images/icon/wx_app_collected.png" />
+    <image wx:else src="/images/icon/wx_app_collect.png" />
+    <text class="{{isloading == true ? 'skeleton':''}} {{collectionStatus?'tool-item-text-activated':''}}">{{collectionStatus?'已':''}}收藏{{post.collectionNum}}</text>
   </view>
   <view class="tool-item comment" catchtap="onCommentTap" data-post-id="{{post._id}}">
     <image src="/images/icon/wx_app_message.png"></image>
-    <text class="{{isloading == true ? 'skeleton':''}}">{{post.comment_num}}</text>
-  </view>
-  <view class="tool-item" catchtap="onCollectionTap" data-post-id="{{post._id}}">
-    <image wx:if="{{post.collection_status}}" src="/images/icon/wx_app_collected.png" />
-    <image wx:else src="/images/icon/wx_app_collect.png" />
-    <text class="{{isloading == true ? 'skeleton':''}}">{{post.collection_num}}</text>
+    <text class="{{isloading == true ? 'skeleton':''}}">评论{{post.commentNum}}</text>
   </view>
 </view>

@@ -1,0 +1,9 @@
+<!--pages/mine/up/up.wxml-->
+<view class="container">
+  <view bindtap="tapHeader" class="header">
+    <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
+  </view>
+  <view class='main'>
+   
+  </view>
+</view>

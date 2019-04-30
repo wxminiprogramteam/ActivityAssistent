@@ -1,9 +1,15 @@
 var app = getApp();
-
+const db = wx.cloud.database({
+  env: "activity-assistant-1065dc"
+});
+const _ = db.command;
 Page({
   data: {
     isloading: true,
-    post:{}
+    post:null,
+    userInfo:null,
+    upStatus: false,
+    collectionStatus: false
   },
   onLoad: function (options) {
     var id = options.id;
@@ -23,128 +29,273 @@ Page({
         }, 1000)
       }
     })
-  },
 
-  setAniation: function () {
-    //定义动画
-    var animationUp = wx.createAnimation({
-      timingFunction: 'ease-in-out'
+    //获取喜欢收藏状态
+    wx.getStorage({
+      key: "currentUser",
+      success(res) {
+
+        console.log(res.data);
+        that.setData({
+          userInfo: res.data
+        })
+        //遍历upPosts
+        if (res.data.upPosts){
+          for (let i = 0; i < res.data.upPosts.length; i++) {
+            if (res.data.upPosts[i] == id) {
+              that.setData({
+                upStatus: true
+              })
+            }
+          }
+        }
+        //遍历collectionPosts
+        for (let i = 0; i < res.data.collectionPosts.length; i++) {
+          if (res.data.collectionPosts[i] == id) {
+            that.setData({
+              collectionStatus: true
+            })
+          }
+        }
+
+      }
     })
-
-    this.animationUp = animationUp
   },
-
-
   onCollectionTap: function (event) {
-    var newData = this.dbPost.collect();
-
-    // 重新绑定数据。注意，不要将整个newData全部作为setData的参数，
-    // 应当有选择的更新部分数据
-
-    this.setData({
-      'post.collectionStatus': newData.collectionStatus,
-      'post.collectionNum': newData.collectionNum
-    })
-
-    // 交互反馈
-    wx.showToast({
-      title: newData.collectionStatus ? "收藏成功" : "取消成功",
-      duration: 1000,
-      icon: "loading",
-      mask: true
-    })
-  },
-
-  onUpTap: function (event) {
-    var newData = this.dbPost.up();
-
-    this.setData({
-      'post.upStatus': newData.upStatus,
-      'post.upNum': newData.upNum
-    }),
-
-      this.animationUp.scale(2).step();
-    this.setData({
-      animationUp: this.animationUp.export()
-    })
-    setTimeout(function () {
-      this.animationUp.scale(1).step();
-      this.setData({
-        animationUp: this.animationUp.export()
-      })
-    }.bind(this), 300);
-  },
-
-  onCommentTap: function (event) {
-    var id = event.currentTarget.dataset.postId;
-    wx.navigateTo({
-      url: '../post-comment/post-comment?id=' + id
-    })
-  },
-
-  //阅读量+1
-  addReadingTimes: function () {
-    this.dbPost.addReadingTimes();
-  },
-
-  onMusicTap: function (event) {
-    if (this.data.isPlayingMusic) {
-      wx.pauseBackgroundAudio();
-      this.setData({
-        isPlayingMusic: false
-      })
-      app.globalData.g_isPlayingMusic = false;
-    }
-    else {
-      wx.playBackgroundAudio({
-        dataUrl: this.postData.music.url,
-        title: this.postData.music.title,
-        coverImgUrl: this.postData.music.coverImg
-      })
-      this.setData({
-        isPlayingMusic: true
-      })
-      app.globalData.g_isPlayingMusic = true;
-      app.globalData.g_currentMusicPostId = this.postData.postId;
-    }
-  },
-
-  setMusicMonitor: function () {
     var that = this;
-    wx.onBackgroundAudioStop(function () {
-      that.setData({
-        isPlayingMusic: false
+    let post = this.data.post;
+    let userInfo = that.data.userInfo;
+    // 如果是未收藏状态
+    if (!that.data.collectionStatus) {
+      post.collectionNum++;
+      //修改当前页面数据(post的喜欢数+1，修改喜欢状态)
+      this.setData({
+        post: post,
+        collectionStatus: true
+      }),
+
+      //修改缓存数据(文章的喜欢数和userInfo的喜欢数组)
+      wx.setStorage({
+        key: post._id,
+        data: post,
       })
-      app.globalData.g_isPlayingMusic = false;
-    });
-
-    wx.onBackgroundAudioPlay(function (event) {
-      // 只处理当前页面的音乐播放。
-      if (app.globalData.g_currentMusicPostId === that.postData.postId) {
-        that.setData({
-          isPlayingMusic: true
-        })
+      // console.log(userInfo);
+      if (userInfo.collectionPosts) {
+        userInfo.collectionPosts.push(post._id);
+      } else {
+        userInfo.collectionPosts = [post._id];
       }
-      app.globalData.g_isPlayingMusic = true;
-    });
+      wx.setStorage({
+        key: "currentUser",
+        data: userInfo,
+      })
+      //修改云数据库数据
+      console.log("修改云数据库数据:"+post.collectionNum);
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'updatePost',
+        // 传给云函数的参数
+        data: {
+          _id: post._id,
+          type: "collection",
+          value: post.collectionNum
+        },
+        success(res) {
+          console.log(res.result)
+        },
+        fail: console.error
+      })
+      db.collection('user').doc(userInfo._id).update({
+        // data 传入需要局部更新的数据
+        data: {
+          collectionPosts: userInfo.collectionPosts
+        },
+        success(res) {
+          console.log("修改云数据库数据" + res.data);
+          db.collection('user').doc(userInfo._id).get({
 
-    wx.onBackgroundAudioPause(function () {
-      // 只处理当前页面的音乐暂停。
-      if (app.globalData.g_currentMusicPostId == that.postData.postId) {
-        that.setData({
-          isPlayingMusic: false
+            success(res){
+              console.log("更新后数据collection:"+JSON.stringify(res.data));
+            }
+          })
+        }
+      })
+      // 交互反馈
+      wx.showToast({
+        title: "收藏成功",
+        duration: 500,
+        icon: "success",
+        mask: true
+      })
+    } else {
+      //已收藏状态
+      post.collectionNum--;
+
+      //修改当前页面数据
+      this.setData({
+        post: post,
+        collectionStatus: false
+      }),
+
+        //修改缓存数据
+        wx.setStorage({
+          key: post._id,
+          data: post,
         })
+      // console.log(userInfo);
+      //删除数组对应项
+      for (let i = 0; i < userInfo.collectionPosts.length; i++) {
+        if (userInfo.collectionPosts[i] == post._id) {
+          userInfo.collectionPosts.splice(i, 1);
+        }
       }
-      app.globalData.g_isPlayingMusic = false;
-    });
+      wx.setStorage({
+        key: "currentUser",
+        data: userInfo,
+      })
+      //修改云数据库数据
+      console.log("修改云数据库数据:" + post.collectionNum);
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'updatePost',
+        // 传给云函数的参数
+        data: {
+          _id: post._id,
+          type: "collection",
+          value: post.collectionNum
+        },
+        success(res) {
+          console.log(res.result)
+        },
+        fail: console.error
+      })
+      db.collection('user').doc(userInfo._id).update({
+        // data 传入需要局部更新的数据
+        data: {
+          collectionPosts: userInfo.collectionPosts
+        },
+        success(res) {
+          console.log("修改云数据库数据" + res.data);
+          db.collection('user').doc(userInfo._id).get({
+
+            success(res) {
+              console.log("更新后数据collection:" + JSON.stringify(res.data));
+            }
+          })
+        }
+      })
+    }
+
+  
   },
 
-  onShareAppMessage: function () {
-    return {
-      title: this.postData.title,
-      desc: this.postData.content,
-      path: "/pages/post/post-detail/post-detail"
+//点击喜欢按钮
+  onUpTap: function (event) {
+    var that = this;
+    let post = this.data.post;
+    let userInfo = that.data.userInfo;
+    // 如果是未喜欢状态
+    if(!that.data.upStatus){
+      post.upNum++;
+      //修改当前页面数据(post的喜欢数+1，修改喜欢状态)
+      this.setData({
+        post: post,
+        upStatus: true
+      }),
+
+        //修改缓存数据(文章的喜欢数和userInfo的喜欢数组)
+        wx.setStorage({
+          key: post._id,
+          data: post,
+        })
+      // console.log(userInfo);
+      if (userInfo.upPosts) {
+        userInfo.upPosts.push(post._id);
+      } else {
+        userInfo.upPosts = [post._id];
+      }
+      wx.setStorage({
+        key: "currentUser",
+        data: userInfo,
+      })
+      //修改云数据库数据
+      console.log("修改云数据库数据up:"+post._id+","+post.upNum);
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'updatePost',
+        // 传给云函数的参数
+        data: {
+          _id: post._id,
+          type: "up",
+          value: post.upNum
+        },
+        success(res) {
+          console.log(res.result)
+        },
+        fail: console.error
+      })
+      db.collection('user').doc(userInfo._id).update({
+        // data 传入需要局部更新的数据
+        data: {
+          upPosts: userInfo.upPosts
+        },
+        success(res) {
+          console.log("修改云数据库数据" + JSON.stringify(res));
+        }
+      })
+    }else{
+    //已喜欢状态
+      post.upNum--;
+
+      //修改当前页面数据(post的喜欢数+1，修改喜欢状态)
+      this.setData({
+        post: post,
+        upStatus: false
+      }),
+
+        //修改缓存数据(文章的喜欢数和userInfo的喜欢数组)
+        wx.setStorage({
+          key: post._id,
+          data: post,
+        })
+      // console.log(userInfo);
+      //删除数组对应项
+      for(let i=0; i<userInfo.upPosts.length; i ++){
+        if(userInfo.upPosts[i] == post._id){
+          userInfo.upPosts.splice(i,1);
+        }
+      }
+      wx.setStorage({
+        key: "currentUser",
+        data: userInfo,
+      })
+      //修改云数据库数据
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'updatePost',
+        // 传给云函数的参数
+        data: {
+          _id: post._id,
+          type: "up",
+          value: post.upNum
+        },
+        success(res) {
+          console.log(res.result)
+        },
+        fail: console.error
+      })
+      db.collection('user').doc(userInfo._id).update({
+        // data 传入需要局部更新的数据
+        data: {
+          upPosts: userInfo.upPosts
+        },
+        success(res) {
+          // console.log("修改云数据库数据" + res.data);
+        }
+      })
     }
-  }
+
+  },
+
 
 })

@@ -1,0 +1,20 @@
+<!--pages/login/login.wxml-->
+<view class='container'>
+  <view bindtap="tapHeader" class="header">
+    <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
+  </view>
+  <view class='main'>
+    <view class='main-header'>
+      <text>欢迎登录</text>
+    </view>
+    <view class='main-main'>
+      <text class='tip'>{{tip}}</text>
+      <input bindinput='inputUsername' placeholder='请输入用户名'></input>
+      <input bindinput='inputPassword' password='true' placeholder='请输入密码'></input>
+      <view bindtap='tapToRegister' class='main-main-goRegister'>
+        <text>没有账号？去注册</text>
+      </view>
+      <button bindtap="tapLogin">登录</button>
+    </view>
+  </view>
+</view>

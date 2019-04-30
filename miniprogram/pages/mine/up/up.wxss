@@ -1,4 +1,4 @@
-/* pages/mine/mine.wxss */
+/* pages/mine/up/up.wxss */
 .header{
   position: fixed;
   width: 750rpx;

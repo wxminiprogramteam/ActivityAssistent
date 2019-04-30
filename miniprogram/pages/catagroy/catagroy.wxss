@@ -35,10 +35,14 @@
 /* end:渐变背景色 */
 .header{
   position: fixed;
+  z-index: 2;
   width: 100%;
-  height: 200rpx;
+  height: 220rpx;
   background-color: #2be2d0;
   margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .search{
   width: 90%;
@@ -53,43 +57,49 @@
 	width: 750rpx;
 	flex-direction: row;
 	justify-content: space-around;
+  background-color: white;
 }
 .header-tab-bar-item{
   display: flex;
-	color: white;
+	color: #999;
 	width: 187.5rpx;
   height: 70rpx;
+  padding: 10rpx 0rpx; 
 	flex-direction: row;
 	justify-content: center;
 	transition: 0.2s all linear;
 }
 .header-tab-bar-item-activated{
   display: flex;
-	color: black;
+	color: #2be2d0;
 	width: 187.5rpx;
   height: 70rpx;
+  padding: 10rpx 0rpx; 
 	flex-direction: row;
 	justify-content: center;
 	transition: 0.2s all linear;
 }
 .header-tab-bar-line{
-  position: absolute;
-  background-color: black;
+  position: fixed;
+  top: 210rpx;
+  background-color: #2be2d0;
   height: 10rpx;
   width: 187.5rpx;
   margin-left: 0rpx;
   transition: 0.2s all linear;
+  display: flex;
+  align-self: flex-start;
 }
 
 .main-scroll{
   width: 100%;
   position: fixed;
-  top: 200rpx;
-  height: calc(100% - 200rpx);
+  top: 220rpx;
+  height: calc(100% - 220rpx);
 }
 .main{
   display: flex;
-  min-height: calc(100% - 200rpx);
+  min-height: calc(100% - 220rpx);
   padding: 20rpx 50rpx;
   flex-direction: row;
   flex-wrap: wrap;

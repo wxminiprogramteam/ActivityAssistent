@@ -1,4 +1,4 @@
-// pages/catagroy/list/list.js
+// pages/mine/collection/collection.js
 Page({
 
   /**
