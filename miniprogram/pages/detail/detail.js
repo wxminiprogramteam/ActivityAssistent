@@ -251,13 +251,13 @@ Page({
       this.setData({
         post: post,
         upStatus: false
-      }),
+      })
 
-        //修改缓存数据(文章的喜欢数和userInfo的喜欢数组)
-        wx.setStorage({
-          key: post._id,
-          data: post,
-        })
+      //修改缓存数据(文章的喜欢数和userInfo的喜欢数组)
+      wx.setStorage({
+        key: post._id,
+        data: post,
+      })
       // console.log(userInfo);
       //删除数组对应项
       for(let i=0; i<userInfo.upPosts.length; i ++){
@@ -296,6 +296,48 @@ Page({
     }
 
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
+  onShow: function(){
+    var that = this;
+    setTimeout(function(){
+      //修改浏览数
+      let post = that.data.post;
+      console.log("onShow: " + JSON.stringify(post));
+      post.readingNum++;
+      //更新当前页面数据
+      that.setData({
+        post: post
+      })
+      //更新缓存数据
+      wx.setStorage({
+        key: post._id,
+        data: post,
+      })
+      //更新云数据库数据
+      wx.cloud.callFunction({
+        // 云函数名称
+        name: 'updatePost',
+        // 传给云函数的参数
+        data: {
+          _id: post._id,
+          type: "reading",
+          value: post.readingNum
+        },
+        success(res) {
+          console.log(res.result)
+        },
+        fail: console.error
+      })
+      console.log(post.readingNum);
 
+    },2000);
+  }
 
 })

@@ -38,10 +38,15 @@ Page({
       })
     }, time, that)
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onPostTapToDetail(event) {
+    var postId = event.currentTarget.dataset.postId;
+    // console.log(postId);
+    wx.navigateTo({
+      url: '/pages/detail/detail?id=' + postId,
+    })
+  },
+
+  onShow: function (options) {
     var that = this;
     //开启欢迎文字动画
     setInterval(this.tapHeader, 5000);
@@ -66,7 +71,8 @@ Page({
       },
     })
 
-  },
+  }, 
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -75,12 +81,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -26,8 +26,4 @@
     <image wx:else src="/images/icon/wx_app_collect.png" />
     <text class="{{isloading == true ? 'skeleton':''}} {{collectionStatus?'tool-item-text-activated':''}}">{{collectionStatus?'已':''}}收藏{{post.collectionNum}}</text>
   </view>
-  <view class="tool-item comment" catchtap="onCommentTap" data-post-id="{{post._id}}">
-    <image src="/images/icon/wx_app_message.png"></image>
-    <text class="{{isloading == true ? 'skeleton':''}}">评论{{post.commentNum}}</text>
-  </view>
 </view>

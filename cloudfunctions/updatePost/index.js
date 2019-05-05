@@ -42,6 +42,13 @@ exports.main = async (event, context) => {
           },
         })
         break;
+      case "reading":
+        return await db.collection('post').doc(event._id).update({
+          data: {
+            readingNum: event.value
+          },
+        })
+        break;
     }
    
   } catch (e) {

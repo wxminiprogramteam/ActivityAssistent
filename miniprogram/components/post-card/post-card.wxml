@@ -30,7 +30,7 @@
     <text class="{{isloading == true ? 'skeleton':''}}">{{item.upNum}}</text>
     <image src="/images/icon/wx_app_collect.png" />
     <text class="{{isloading == true ? 'skeleton':''}}">{{item.collectionNum}}</text>
-    <image src="/images/icon/wx_app_message.png"></image>
-    <text class="{{isloading == true ? 'skeleton':''}}">{{item.commentNum}}</text>
+    <!-- <image src="/images/icon/wx_app_message.png"></image>
+    <text class="{{isloading == true ? 'skeleton':''}}">{{item.commentNum}}</text> -->
   </view>
 </view>
