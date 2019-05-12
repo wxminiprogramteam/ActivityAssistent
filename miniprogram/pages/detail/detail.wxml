@@ -17,13 +17,18 @@
 </view>
 <view class="tool">
   <view class="tool-item" catchtap="onUpTap" data-post-id="{{post._id}}">
-     <image animation="{{animationUp}}" wx:if="{{upStatus}}" src="/images/icon/wx_app_liked.png" />
-     <image animation="{{animationUp}}" wx:else src="/images/icon/wx_app_like.png" />
-    <text  class="{{isloading == true ? 'skeleton':''}} {{upStatus?'tool-item-text-activated':''}}">{{upStatus?'已':''}}喜欢{{post.upNum}}</text>
+    <image animation="{{animationUp}}" wx:if="{{upStatus}}" src="/images/icon/wx_app_liked.png" />
+    <image animation="{{animationUp}}" wx:else src="/images/icon/wx_app_like.png" />
+    <text class="{{isloading == true ? 'skeleton':''}} {{upStatus?'tool-item-text-activated':''}}">{{upStatus?'已':''}}喜欢{{post.upNum}}</text>
   </view>
   <view class="tool-item" catchtap="onCollectionTap" data-post-id="{{post._id}}">
     <image wx:if="{{collectionStatus}}" src="/images/icon/wx_app_collected.png" />
     <image wx:else src="/images/icon/wx_app_collect.png" />
     <text class="{{isloading == true ? 'skeleton':''}} {{collectionStatus?'tool-item-text-activated':''}}">{{collectionStatus?'已':''}}收藏{{post.collectionNum}}</text>
+  </view>
+  <view class="tool-item" catchtap="signUp" data-post-id="{{post._id}}">
+    <image src="/images/icon/signUp.png" />
+    <text>点击报名</text>
+
   </view>
 </view>

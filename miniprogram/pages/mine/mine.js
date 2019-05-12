@@ -10,6 +10,7 @@ Page({
    */
   data: {
     isLogin: false,
+    isManager:false,
     userInfo:null,
     // sNumber:"17051122",
     welcomeWords:[
@@ -55,6 +56,7 @@ Page({
           that.setData({
             isLogin: false,
             userInfo: null,
+            isManager: false,
           })
           wx.setStorage({
             key: 'currentUser',
@@ -131,13 +133,36 @@ Page({
   },
 
   tapToUp: function(){
+    if(!this.userInfo){
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/mine/up/up',
     })
   },
   tapToCollection: function(){
+    if (!this.userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/mine/collection/collection',
+    })
+  },
+  publishActivities(){
+    wx.navigateTo({
+      url: '../publish/publish',
     })
   },
   /**
@@ -168,7 +193,17 @@ Page({
         if(res.data){
           that.setData({
             isLogin: true,
-            userInfo: res.data
+            userInfo: res.data,
+            isManager:res.data.isManager
+          })
+          console.log(res.data.avatarUrl)
+          db.collection('user').where(that.data.userInfo._id).get({
+            success: function (res) {
+              that.setDat({
+                userInfo: res.data
+              })
+              console.log(res.data.avatarUrl)
+            }
           })
         }
         

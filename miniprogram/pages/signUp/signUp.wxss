@@ -1,0 +1,2 @@
+/* pages/signUp/signUp.wxss */
+@import "../template/formTemplate.wxss";

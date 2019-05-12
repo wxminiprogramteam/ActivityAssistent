@@ -1,0 +1,59 @@
+/* pages/template/formTemplate.wxss */
+radio .wx-radio-input{ 
+  /* 自定义样式.... */
+    height: 34rpx; 
+    width: 34rpx;
+    margin-top: -4rpx;
+    border-radius: 50%;
+    border: 2rpx solid #999;
+    background: transparent;
+ }
+/* 选中后的 背景样式  */
+radio .wx-radio-input.wx-radio-input-checked{
+   border: none;
+   background: black;
+}
+/* 选中后的 对勾样式  */
+radio .wx-radio-input.wx-radio-input-checked::before{
+   border-radius: 100%;/* 圆角 */
+   width: 36rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+   height: 36rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+   line-height: 34rpx;
+   text-align: center;
+   font-size:34rpx; /* 对勾大小 30rpx */
+   color:#fff; /* 对勾颜色 白色 */
+   background: black;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+checkbox .wx-checkbox-input{ 
+  /* 自定义样式.... */
+    height: 34rpx; 
+    width: 34rpx;
+    margin-top: -4rpx;
+    border-radius: 50%;
+    border: 2rpx solid #999;
+    background: transparent;
+ }
+ 
+/* 选中后的 背景样式 */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   border: none;
+   background: black;
+}
+/* 选中后的 对勾样式 */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   border-radius: 100%;/* 圆角 */
+   width: 36rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+   height: 36rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+   line-height: 34rpx;
+   text-align: center;
+   font-size:34rpx; /* 对勾大小 30rpx */
+   color:#fff; /* 对勾颜色 白色 */
+   background: black;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+.isNecessary{
+  color: red
+}

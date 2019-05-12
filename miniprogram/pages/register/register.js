@@ -134,7 +134,8 @@ Page({
         collectionPosts: [],
         comments: [],
         signUp: [],
-        history: []
+        history: [],
+        isManager:false
       }
     }).then(res => {
       console.log('注册成功！')

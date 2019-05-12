@@ -1,0 +1,9 @@
+/* pages/publish/publish.wxss */
+@import "../template/formTemplate.wxss";
+
+.delete-item{
+
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}

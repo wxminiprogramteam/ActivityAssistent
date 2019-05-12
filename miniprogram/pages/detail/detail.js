@@ -9,11 +9,15 @@ Page({
     post:null,
     userInfo:null,
     upStatus: false,
+    postId:"",
     collectionStatus: false
   },
   onLoad: function (options) {
     var id = options.id;
     var that = this;
+    that.setData({
+      postId:id
+      })
     console.log(id);
     wx.getStorage({
       key: id,
@@ -34,29 +38,32 @@ Page({
     wx.getStorage({
       key: "currentUser",
       success(res) {
-
         console.log(res.data);
-        that.setData({
-          userInfo: res.data
-        })
-        //遍历upPosts
-        if (res.data.upPosts){
-          for (let i = 0; i < res.data.upPosts.length; i++) {
-            if (res.data.upPosts[i] == id) {
+        if(res.data){
+
+          that.setData({
+            userInfo: res.data
+          })
+          //遍历upPosts
+          if (res.data.upPosts) {
+            for (let i = 0; i < res.data.upPosts.length; i++) {
+              if (res.data.upPosts[i] == id) {
+                that.setData({
+                  upStatus: true
+                })
+              }
+            }
+          }
+          //遍历collectionPosts
+          for (let i = 0; i < res.data.collectionPosts.length; i++) {
+            if (res.data.collectionPosts[i] == id) {
               that.setData({
-                upStatus: true
+                collectionStatus: true
               })
             }
           }
         }
-        //遍历collectionPosts
-        for (let i = 0; i < res.data.collectionPosts.length; i++) {
-          if (res.data.collectionPosts[i] == id) {
-            that.setData({
-              collectionStatus: true
-            })
-          }
-        }
+        
 
       }
     })
@@ -65,6 +72,17 @@ Page({
     var that = this;
     let post = this.data.post;
     let userInfo = that.data.userInfo;
+
+    // 判断是否已登录
+    if(!userInfo){
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     // 如果是未收藏状态
     if (!that.data.collectionStatus) {
       post.collectionNum++;
@@ -194,6 +212,15 @@ Page({
     var that = this;
     let post = this.data.post;
     let userInfo = that.data.userInfo;
+    if (!userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     // 如果是未喜欢状态
     if(!that.data.upStatus){
       post.upNum++;
@@ -295,6 +322,24 @@ Page({
       })
     }
 
+  },
+  //报名
+  signUp(){
+    var that = this;
+    let post = this.data.post;
+    let userInfo = that.data.userInfo;
+    if (!userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '../signUp/signUp?id='+that.data.postId,
+    })
   },
   /**
    * 用户点击右上角分享
