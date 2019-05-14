@@ -81,6 +81,12 @@ Page({
         icon: "none",
         mask: true
       })
+      setTimeout(function () {
+        wx.switchTab({
+          url: '/pages/mine/mine'
+        })
+      }, 1000)
+
       return;
     }
     // 如果是未收藏状态
@@ -219,6 +225,12 @@ Page({
         icon: "none",
         mask: true
       })
+      setTimeout(function () {
+        wx.switchTab({
+          url: '/pages/mine/mine'
+        })
+      }, 1000)
+
       return;
     }
     // 如果是未喜欢状态
@@ -335,6 +347,12 @@ Page({
         icon: "none",
         mask: true
       })
+      setTimeout(function(){
+        wx.switchTab({
+          url: '/pages/mine/mine'
+        })
+      },1000)
+
       return;
     }
     wx.navigateTo({
@@ -345,6 +363,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
+  tapShare: function(){
+    console.log("share");
     wx.showShareMenu({
       withShareTicket: true
     })

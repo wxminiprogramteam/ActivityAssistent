@@ -268,6 +268,9 @@ Page({
           success(res) {
             // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
             console.log(res)
+            wx.reLaunch({
+              url: '/pages/index/index'
+            })
           }
         })
 

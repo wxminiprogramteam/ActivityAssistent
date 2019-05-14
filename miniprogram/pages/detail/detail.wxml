@@ -32,3 +32,4 @@
 
   </view>
 </view>
+<button data-id="shareBtn" class="share-btn" open-type="share">点击分享</button>

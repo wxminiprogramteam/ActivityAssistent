@@ -133,7 +133,7 @@ Page({
   },
 
   tapToUp: function(){
-    if(!this.userInfo){
+    if(!this.data.userInfo){
       wx.showToast({
         title: "请先登录",
         duration: 500,
@@ -147,7 +147,8 @@ Page({
     })
   },
   tapToCollection: function(){
-    if (!this.userInfo) {
+
+    if (!this.data.userInfo) {
       wx.showToast({
         title: "请先登录",
         duration: 500,

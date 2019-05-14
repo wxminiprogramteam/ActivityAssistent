@@ -91,16 +91,7 @@
   color: #000
 }
 
-.comment image{
-  /* transform: scale(.85); */
-}
-
-.music {
-  width: 110rpx;
-  height: 110rpx;
-  position: absolute;
-  left: 50%;
-  margin-left: -51rpx;
-  top: 180rpx;
-  opacity: 0.9;
+.share-btn{
+  color: #555;
+  font-size: 50rpx;
 }
