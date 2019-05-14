@@ -73,7 +73,7 @@ Page({
               icon: 'success',
               duration: 1000
             })
-            setTimeout(function () {
+            setTimeout(function () {  
               wx.navigateBack({
 
               })

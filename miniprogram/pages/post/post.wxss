@@ -1,0 +1,99 @@
+@import"../../style/skeleton.wxss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-head-image {
+  width: 750rpx;
+  height: 460rpx;
+}
+
+.post-title {
+  font-size: 20px;
+  margin: 30rpx;
+  letter-spacing: 2px;
+  color: #4b556c;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15rpx;
+  margin-left: 30rpx;
+  align-items: center;
+  justify-content: space-between;
+  font-size:13px;
+}
+
+.post-info-organizer {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-info-organizer-img {
+  height: 50rpx;
+  width: 50rpx;
+  border-radius: 50%;
+}
+
+.post-info-organizer-name {
+  font-weight: 300;
+  margin-left: 20rpx;
+  color: #666;
+}
+
+.post-info-time, .post-info-place {
+  color: #919191;
+}
+
+
+
+.detail {
+  color: #666;
+  margin: 40rpx 22rpx 0;
+  line-height: 44rpx;
+  letter-spacing: 1px;
+  font-size:14px;
+}
+
+/*点赞和评论*/
+.tool{
+  height: 64rpx;
+  margin: 20rpx 28rpx 20rpx 0;
+  display: flex;
+  justify-content: center;
+  color: #999;
+  font-size: 35rpx;
+}
+.tool-item{
+  align-items: center;
+  margin-right: 30rpx;
+  display: flex;
+}
+
+.tool-item:last-child{
+  margin-right: 0rpx;
+}
+
+.tool-item image{
+  height: 30rpx;
+  width:30rpx;
+  margin-right: 10rpx;
+}
+
+.comment image{
+  /* transform: scale(.85); */
+}
+
+.music {
+  width: 110rpx;
+  height: 110rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -51rpx;
+  top: 180rpx;
+  opacity: 0.9;
+}

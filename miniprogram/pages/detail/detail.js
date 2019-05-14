@@ -9,11 +9,15 @@ Page({
     post:null,
     userInfo:null,
     upStatus: false,
+    postId:"",
     collectionStatus: false
   },
   onLoad: function (options) {
     var id = options.id;
     var that = this;
+    that.setData({
+      postId:id
+      })
     console.log(id);
     wx.getStorage({
       key: id,
@@ -318,6 +322,24 @@ Page({
       })
     }
 
+  },
+  //报名
+  signUp(){
+    var that = this;
+    let post = this.data.post;
+    let userInfo = that.data.userInfo;
+    if (!userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '../signUp/signUp?id='+that.data.postId,
+    })
   },
   /**
    * 用户点击右上角分享

@@ -35,6 +35,11 @@
         <text class='main-main-item-text'>报名记录</text>
         <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
       </view>
+      <view class='main-main-item' bindtap='publishActivities' wx:if='{{isLogin && isManager}}'>
+        <image class='main-main-item-icon' src='../../images/publishActivities.png'></image>
+        <text class='main-main-item-text'>发布活动</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
       <view class='main-main-item'>
         <image class='main-main-item-icon' src='../../images/calendar-check.png'></image>
         <text class='main-main-item-text'>历史记录</text>

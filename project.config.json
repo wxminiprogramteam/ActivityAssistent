@@ -11,6 +11,8 @@
 	"appid": "wx1209e1bcf72d6984",
 	"projectname": "ActivityAssistent",
 	"libVersion": "2.6.6",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

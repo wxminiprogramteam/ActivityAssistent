@@ -1,0 +1,84 @@
+<!--pages/publish/publish.wxml-->
+<import src="../template/formTemplate.wxml" />
+<form name='activityData' bindsubmit='activitySubmit'>
+  <text>组织者</text>
+  <input name="organizer" type='text' placeholder='主办方'></input>
+  <text>讲座名称</text>
+  <input name="title" type='text' placeholder='讲座名称'></input>
+  <text>讲座类型</text>
+  <radio-group name="type">
+    <radio value='lilun'>
+    </radio>
+    <text>理论研究\n</text>
+    <radio value='zhiyuan'>
+    </radio>
+    <text>志愿服务\n</text>
+    <radio value='tiyu'>
+    </radio>
+    <text>体育竞技\n</text>
+    <radio value='wenhua'>
+    </radio>
+    <text>文化艺术\n</text>
+  </radio-group>
+  <text>举办时间</text>
+  <input name="activityTime" type='text' placeholder='x月x日 xx时-xx时'></input>
+  <text>举办地点</text>
+  <input name="place" type='text' placeholder='xx教学楼xx教室'></input>
+  <text>讲座简介</text>
+  <input name="content" type='text' placeholder='关于讲座的大致介绍'></input>
+  <text>讲座详细介绍</text>
+  <textarea name="detail" placeholder='关于讲座的详细内容'></textarea>
+  <text>讲座相关图片</text>
+  <image src="{{isPostImg?postImgPath:'../../images/icon/wx_app_add.png'}}" bindtap='postImgUplod'></image>
+  <button form-type='submit'>提交</button>
+</form>
+<text>讲座报名表单编辑 \n</text>
+<template is='formShow' data='{{formdata}}'>
+</template>
+<view>
+  <button bindtap='addAttribute'>添加新字段</button>
+</view>
+<view wx:if='{{isAddAttribute}}'>
+  <form name="formData" bindsubmit='formsubmit'>
+    <text>输入字段名称</text>
+    <input name='title' type='text'></input>
+    <text>是否必填</text>
+    <radio-group name="isNecessary">
+      <radio value='true' checked='true'>是</radio>
+      <radio value='false'>否</radio>
+    </radio-group>
+    <text>类型</text>
+    <picker name='type' mode='selector' bindchange='pickerChange' value="{{index}}" range="{{types}}" range-key="{{'name'}}">
+      <view class='picker'>
+        {{types[index].name}}
+      </view>
+    </picker>
+    <view wx:if="{{index>=2}}">
+      <text>当前选项：\t</text>
+      <view wx:for="{{tempOptions}}" wx:for-item="option" wx:for-index="index">
+        <text>{{index+1}}.{{option}} \t</text>
+      </view>
+      <button bindtap='addOption'>添加选项</button>
+      <form wx:if="{{isAddOption}}" bindsubmit='optionsform'>
+        <text>输入选项名称</text>
+        <input name="optionName" type='text'></input>
+        <button form-type='submit'>确认</button>
+      </form>
+    </view>
+    <view wx:if="{{!isAddOption}}">
+      <button form-type='submit'>确认 </button>
+      <button bindtap='cannel'>取消</button>
+    </view>
+  </form>
+</view>
+<view wx:if='{{!isAddAttribute}}'>
+  <button bindtap='deleteAttribute'>删除字段</button>
+</view>
+<view wx:if="{{isDeleteAttribute}}">
+  <view class='delete-item' wx:for="{{formdata}}" wx:for-item="item" wx:for-index="idx">
+    <text class='text-cancel'>{{idx+1}}.{{item.title}}</text>
+    <label class='icon-cancel'>
+      <icon type='cancel' bindtap='delete' data-title='{{item.title}}' data-deleteIndex='{{idx}}'>删除</icon>
+    </label>
+  </view>
+</view>

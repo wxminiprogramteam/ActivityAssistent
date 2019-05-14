@@ -1,0 +1,42 @@
+<!--pages/template/formTemplate.wxml-->
+<template name="formShow">
+  <view class='context'> 
+    <view wx:for="{{formdata}}" wx:for-item="item" wx:for-index="itemIndex" wx:key="title">
+      <text>{{item.title}}</text>
+      <text class='isNecessary' wx:if="{{item.isNecessary}}"> *</text>
+      <!-- 文本 -->
+      <view wx:if="{{item.type=='text'}}">
+        <input type='{{item.type}}' name='{{item.title}}'></input>
+      </view>
+      <!-- 多行文本 -->
+      <view wx:if="{{item.type=='textarea'}}">
+        <textarea name='{{item.title}}' auto-height='true'></textarea>
+      </view>
+      <!-- 单选框 -->
+      <view wx:if="{{item.type=='radio'}}">
+        <radio-group name="{{item.title}}" bindchange="radioBindChange" data-optionIndex="{{itemIndex}}">
+          <label wx:for='{{item.options}}' wx:for-item='option' wx:for-index='idx'>
+            <radio value='{{option}}'></radio>
+            <text>{{option}}\n</text>
+          </label>
+        </radio-group>
+      </view>
+      <!-- 多选框 -->
+      <view wx:if="{{item.type=='checkbox'}}">
+        <checkbox-group name="{{item.title}}" bindchange="checkBindChange" data-optionIndex="{{itemIndex}}">
+          <label wx:for='{{item.options}}' wx:for-item='option' wx:for-index='idx'>
+            <checkbox value='{{option}}'></checkbox>
+            <text>{{option}}\n</text>
+          </label>
+        </checkbox-group>
+      </view>
+      <view wx:if="{{item.type=='picker'}}">
+        <picker name='{{item.title}}' bindchange="pickerBindChange" data-optionIndex="{{itemIndex}}" range='{{item.options}}'>
+          <view>
+            {{item.options[item.select]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+</template>

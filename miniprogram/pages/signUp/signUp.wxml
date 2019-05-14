@@ -1,0 +1,7 @@
+<!--pages/signUp/signUp.wxml-->
+<import src="../template/formTemplate.wxml"/>
+<form bindsubmit='formsubmit'>
+<template is='formShow' data='{{formdata}}'>
+</template>
+<button form-type='submit'>提交</button>
+</form>

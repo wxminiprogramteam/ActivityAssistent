@@ -8,7 +8,10 @@
     "pages/detail/detail",
     "pages/login/login",
     "pages/register/register",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/publish/publish",
+    "pages/template/formTemplate",
+    "pages/signUp/signUp"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -39,5 +42,6 @@
         "selectedIconPath": "images/userSelected.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
