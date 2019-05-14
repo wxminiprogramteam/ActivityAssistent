@@ -131,11 +131,29 @@ Page({
   },
 
   tapToUp: function(){
+    if(!this.userInfo){
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/mine/up/up',
     })
   },
   tapToCollection: function(){
+    if (!this.userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
     wx.navigateTo({
       url: '/pages/mine/collection/collection',
     })
@@ -154,7 +172,7 @@ Page({
    */
   onReady: function () {
 
-  },
+  },                   
 
   /**
    * 生命周期函数--监听页面显示
@@ -169,6 +187,15 @@ Page({
           that.setData({
             isLogin: true,
             userInfo: res.data
+          })
+          console.log(res.data.avatarUrl)
+          db.collection('user').where(that.data.userInfo._id).get({
+            success: function (res) {
+              that.setDat({
+                userInfo: res.data
+              })
+              console.log(res.data.avatarUrl)
+            }
           })
         }
         
