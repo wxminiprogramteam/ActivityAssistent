@@ -93,7 +93,7 @@ Page({
           })
           wx.cloud.uploadFile({
             //加时间戳，使下面的setData能刷新图片
-            cloudPath: 'userAvatar/' + that.data.userInfo.username+Date.parse(new Date())+".png", // 上传至云端的路径
+            cloudPath: 'userAvatar/' + that.data.userInfo._openid+Date.parse(new Date())+".png", // 上传至云端的路径
             filePath: tempFilePaths, // 小程序临时文件路径
             success: res => {
               // 返回文件 ID
@@ -131,7 +131,20 @@ Page({
     }
     
   },
-
+  tapToPersonInfo: function () {
+    if (!this.data.userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/mine/personInfo/personInfo',
+    })
+  },
   tapToUp: function(){
     if(!this.data.userInfo){
       wx.showToast({
@@ -165,6 +178,77 @@ Page({
     wx.navigateTo({
       url: '../publish/publish',
     })
+  },
+  onGotUserInfo: function(e){
+    var that = this;
+    console.log(e.detail.errMsg)
+    console.log(e.detail.userInfo)
+    console.log(e.detail.rawData)
+    //获取openid
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'login',
+      success(res) {
+        console.log(res.result.openid);
+        var openid = res.result.openid;
+        //查询数据库中是否有用户的数据，若有则直接登录，若无则添加数据
+        db.collection('user').where({
+          _openid: openid
+        }).get({
+          success: (res) => {
+            let users = res.data;  //获取到的对象数组数据
+            console.log(users[0]);
+            
+            if(users.length == 0){
+              var user = {
+                name: "",
+                nickname: e.detail.userInfo.nickName,
+                avatarUrl: e.detail.userInfo.avatarUrl,
+                sNumber: "",
+                academy: "",
+                major: "",
+                phone: "",
+                collectionPosts: [],
+                signUp: [],
+                history: [],
+                isManager: false
+              }
+              db.collection('user').add({  //添加数据
+                data: user
+              }).then(res => {
+                console.log(res)
+              })
+
+              users[0] = user;
+            }
+            //设置到本地缓存中
+            wx.setStorage({
+              key: 'currentUser',
+              data: users[0]
+            })
+            //设置到全局变量中
+            console.log("设置前:"+JSON.stringify(app.globalData.userInfo));
+            app.globalData.userInfo = users[0];
+            console.log("设置后:" + JSON.stringify(app.globalData.userInfo));
+            wx.showToast({
+              title: '登录成功！',
+              icon: 'success',
+              duration: 1000
+            })
+            that.setData({
+              userInfo: app.globalData.userInfo,
+              isLogin: true
+            })
+          },
+          fail: (error) => {
+            console.log(error);
+          }
+        })
+      },
+      fail: console.error
+    })
+
+
   },
   /**
    * 生命周期函数--监听页面加载

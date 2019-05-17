@@ -1,0 +1,83 @@
+<!--pages/mine/mine.wxml-->
+<view class="container">
+  <view bindtap="tapHeader" class="header">
+    <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
+  </view>
+  <view class='main'>
+    <view class='main-header'>
+      <image bindtap="changeAvatar" class='main-header-avatar' src="{{userInfo.avatarUrl}}"></image>
+      <view class='main-header-info'>
+        <text class='main-header-info-name'>{{userInfo.nickname}}</text>
+        <view class="main-header-info-sNumber-box">
+          <view wx:if="{{isEdit}}" class="input-box">
+            <text class='main-header-info-sNumber'>学号：</text>
+            <input bindinput='inputSNumber' value='{{userInfo.sNumber}}'></input>
+          </view>
+          <view wx:else class="info-box">
+            <text class='main-header-info-sNumber'>学号：</text>
+            <view class="info-right-box">
+              <text class="main-header-info-sNumber">{{userInfo.sNumber}}</text>
+            </view>
+          </view>
+          
+        </view>
+      </view>
+    </view>
+    <view class='main-main'>
+      <view class='main-main-item'>
+        <view wx:if="{{isEdit}}" class="input-box">
+          <text class='main-main-item-text'>姓名：</text>
+          <input bindinput='inputName' value='{{userInfo.name}}'></input>
+        </view>
+        <view wx:else class="info-box">
+          <text class='main-main-item-text'>姓名：</text>
+          <view class="info-right-box">
+            <text class="info-right">{{userInfo.name}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='main-main-item'>
+        <view wx:if="{{isEdit}}" class="input-box">
+          <text class='main-main-item-text'>学院：</text>
+          <input bindinput='inputAcademy' value='{{userInfo.academy}}'></input>
+        </view>
+        <view wx:else class="info-box">
+          <text class='main-main-item-text'>学院：</text>
+          <view class="info-right-box">
+            <text class="info-right">{{userInfo.academy}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='main-main-item'>
+        <view wx:if="{{isEdit}}" class="input-box">
+          <text class='main-main-item-text'>专业：</text>
+          <input bindinput='inputMajor' value='{{userInfo.major}}'></input>
+        </view>
+        <view wx:else class="info-box">
+          <text class='main-main-item-text'>专业：</text>
+          <view class="info-right-box">
+            <text class="info-right">{{userInfo.major}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='main-main-item'>
+        <view wx:if="{{isEdit}}" class="input-box">
+          <text class='main-main-item-text'>联系方式：</text>
+          <input bindinput='inputPhone' value='{{userInfo.phone}}'></input>
+        </view>
+        <view wx:else class="info-box">
+          <text class='main-main-item-text'>联系方式：</text>
+          <view class="info-right-box">
+            <text class="info-right">{{userInfo.phone}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view bindtap='tapEditInfo' class='logout-btn-box' wx:if="{{!isEdit}}" >
+      <button class="logout-btn">修改资料</button>
+    </view>
+    <view bindtap='tapChangeInfo' class='logout-btn-box' wx:if="{{isEdit}}" >
+      <button class="logout-btn">确定修改</button>
+    </view>
+  </view>
+</view>

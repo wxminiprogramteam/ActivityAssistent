@@ -7,14 +7,22 @@
     <view class='main-header'>
       <image bindtap="changeAvatar" class='main-header-avatar' src="{{isLogin?userInfo.avatarUrl : '../../images/user.png'}}"></image>
       <view class='main-header-info' wx:if="{{isLogin}}">
-        <text class='main-header-info-name'>{{userInfo.name}}</text>
+        <text class='main-header-info-name'>{{userInfo.nickname}}</text>
         <text class='main-header-info-sNumber'>学号：{{userInfo.sNumber}}</text>
       </view>
-      <button wx:else bindtap="tapLogin">
+      <!-- <button wx:else bindtap="tapLogin">
         <text>点击登录</text>
-      </button>
+      </button> -->
+      <!-- test wxlogin-->
+      <button wx:else type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击登录</button>
+     <!-- end:test wxlogin-->
     </view>
     <view class='main-main'>
+      <view bindtap='tapToPersonInfo' class='main-main-item'>
+        <image class='main-main-item-icon' src="../../images/star.png"></image>
+        <text class='main-main-item-text'>个人资料</text>
+        <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
+      </view>
       <view bindtap='tapToUp' class='main-main-item'>
         <image class='main-main-item-icon' src="../../images/star.png"></image>
         <text class='main-main-item-text'>我的喜欢</text>
@@ -26,7 +34,7 @@
         <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
       </view>
       <view class='main-main-item'>
-        <image class='main-main-item-icon' src="../../images/unordered list.png"></image>
+        <image class='main-main-item-icon' src="../../images/unorderedList.png"></image>
         <text class='main-main-item-text'>报名记录</text>
         <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
       </view>
