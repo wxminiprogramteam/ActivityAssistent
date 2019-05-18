@@ -1,38 +1,6 @@
 /* pages/classify/classify.wxss */
 @import"../../style/skeleton.wxss";
-/* 渐变背景色 */
-.bg-blue{
-    background: -webkit-linear-gradient(135deg,rgba(43,226,208,1), rgba(43,226,208,0.5)); /* Safari 5.1 - 6.0 */ 
-  background: -o-linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* Opera 11.1 - 12.0 */ 
-  background: -moz-linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* Firefox 3.6 - 15 */ 
-  background: linear-gradient(135deg,rgba(43,226,208,1), rgba(43,226,208,0.5)); /* 标准的语法 */
-}
-.bg-emerald{
-  background: -webkit-linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* Safari 5.1 - 6.0 */ 
-  background: -o-linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* Opera 11.1 - 12.0 */ 
-  background: -moz-linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* Firefox 3.6 - 15 */ 
-  background: linear-gradient(135deg,rgba(46,204,113,1), rgba(46,204,113,0.5)); /* 标准的语法 */ 
-}
-.bg-peterriver{
-  background: -webkit-linear-gradient(135deg,rgba(52,152,219,1), rgba(52,152,219,0.5)); /* Safari 5.1 - 6.0 */ 
-  background: -o-linear-gradient(135deg,rgba(52,152,219,1), rgba(52,152,219,0.5)); /* Opera 11.1 - 12.0 */ 
-  background: -moz-linear-gradient(135deg,rgba(52,152,219,1), rgba(52,152,219,0.5)); /* Firefox 3.6 - 15 */ 
-  background: linear-gradient(135deg,rgba(52,152,219,1), rgba(52,152,219,0.5)); /* 标准的语法 */ 
-}
-.bg-sunflower{
-  background: -webkit-linear-gradient(135deg,rgba(241,196,15,1), rgba(241,196,15,0.5)); /* Safari 5.1 - 6.0 */ 
-  background: -o-linear-gradient(135deg,rgba(241,196,15,1), rgba(241,196,15,0.5)); /* Opera 11.1 - 12.0 */ 
-  background: -moz-linear-gradient(135deg,rgba(241,196,15,1), rgba(241,196,15,0.5)); /* Firefox 3.6 - 15 */ 
-  background: linear-gradient(135deg,rgba(241,196,15,1), rgba(241,196,15,0.5)); /* 标准的语法 */ 
-}
-.bg-alizarin{
-  background: -webkit-linear-gradient(135deg,rgba(231,76,60,1), rgba(231,76,60,0.5)); /* Safari 5.1 - 6.0 */ 
-  background: -o-linear-gradient(135deg,rgba(231,76,60,1), rgba(231,76,60,0.5)); /* Opera 11.1 - 12.0 */ 
-  background: -moz-linear-gradient(135deg,rgba(231,76,60,1), rgba(231,76,60,0.5)); /* Firefox 3.6 - 15 */ 
-  background: linear-gradient(135deg,rgba(231,76,60,1), rgba(231,76,60,0.5)); /* 标准的语法 */ 
-}
 
-/* end:渐变背景色 */
 .header{
   position: fixed;
   z-index: 2;

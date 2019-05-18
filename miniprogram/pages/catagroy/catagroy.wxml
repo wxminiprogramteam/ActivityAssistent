@@ -35,8 +35,8 @@
 				</scroll-view>
 			</swiper-item>
       <!-- 志愿活动 -->
-      <swiper-item class="society-swiper-item">
-				<scroll-view class="society-swiper-item-scroll" scroll-y>
+      <swiper-item class="swiper-item">
+				<scroll-view class="swiper-item-scroll" scroll-y>
 					<!-- Component post-card 文章简介卡片 -->
           <post-card
             wx:for="{{zhiyuan}}" 
@@ -51,8 +51,8 @@
 				</scroll-view>
 			</swiper-item>
       <!-- 体育竞技 -->
-      <swiper-item class="society-swiper-item">
-				<scroll-view class="society-swiper-item-scroll" scroll-y>
+      <swiper-item class="swiper-item">
+				<scroll-view class="swiper-item-scroll" scroll-y>
 					<!-- Component post-card 文章简介卡片 -->
           <post-card
             wx:for="{{tiyu}}" 
@@ -67,8 +67,8 @@
 				</scroll-view>
 			</swiper-item>
       <!-- 文化艺术 -->
-      <swiper-item class="society-swiper-item">
-				<scroll-view class="society-swiper-item-scroll" scroll-y>
+      <swiper-item class="swiper-item">
+				<scroll-view class="swiper-item-scroll" scroll-y>
 					<!-- Component post-card 文章简介卡片 -->
           <post-card
             wx:for="{{wenhua}}" 

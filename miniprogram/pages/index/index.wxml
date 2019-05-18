@@ -3,7 +3,7 @@
   <view class="header">
     <input bindtap='tapToSearch' class="search" placeholder='搜索'/>
   </view>
-  <scroll-view class="main-scroll" scroll-y="true">
+  <view class="main-scroll" >
     <view class="main">
       <swiper 
         catchtap="onSwiperTapToDetail" 
@@ -33,6 +33,8 @@
       >
       </post-card>
       <!-- end: Component post-card 文章简介卡片 -->
+      <view class="LoadMoreTip" wx:if='{{!isHideLoadMore}}'><text>正在加载...</text></view>
+      <view class="LoadMoreTip" wx:if="{{!hasMore}}"><text>我是有底线的(✿◡‿◡)</text></view>
     </view>
-  </scroll-view>
+  </view>
 </view>

@@ -114,6 +114,7 @@ Page({
     wx.navigateTo({
       url: '/pages/search/search',
     })
-  }
+  },
+  
 
 })

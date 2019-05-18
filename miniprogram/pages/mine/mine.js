@@ -80,17 +80,17 @@ Page({
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths[0];
-          //先删除原来的头像图片
-          wx.cloud.deleteFile({
-            fileList: [that.data.userInfo.avatarUrl],
-            success: res => {
-              // handle success
-              console.log(res.fileList)
-            },
-            fail: err => {
-              // handle error
-            }
-          })
+          // //先删除原来的头像图片
+          // wx.cloud.deleteFile({
+          //   fileList: [that.data.userInfo.avatarUrl],
+          //   success: res => {
+          //     // handle success
+          //     console.log(res.fileList)
+          //   },
+          //   fail: err => {
+          //     // handle error
+          //   }
+          // })
           wx.cloud.uploadFile({
             //加时间戳，使下面的setData能刷新图片
             cloudPath: 'userAvatar/' + that.data.userInfo._openid+Date.parse(new Date())+".png", // 上传至云端的路径
