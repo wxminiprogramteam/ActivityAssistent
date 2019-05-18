@@ -275,6 +275,7 @@ Page({
       key: 'currentUser',
       success: function (res) {
         // console.log(res.data);
+        //如果本地缓存存在，表示用户已登录，先用本地缓存的数据填充，然后拉取云数据库的数据并填充
         if(res.data){
           that.setData({
             isLogin: true,
@@ -282,23 +283,15 @@ Page({
             isManager:res.data.isManager
           })
           console.log(res.data.avatarUrl)
-          db.collection('user').where(that.data.userInfo._id).get({
+          db.collection('user').doc(that.data.userInfo._id).get({
             success: function (res) {
-              that.setDat({
+              that.setData({
                 userInfo: res.data
               })
               console.log(res.data.avatarUrl)
             }
           })
-          console.log(res.data.avatarUrl)
-          db.collection('user').where(that.data.userInfo._id).get({
-            success: function (res) {
-              that.setDat({
-                userInfo: res.data
-              })
-              console.log(res.data.avatarUrl)
-            }
-          })
+
         }
         
       },

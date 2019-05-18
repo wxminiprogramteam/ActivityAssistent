@@ -237,7 +237,7 @@ Page({
       msg: '提交成功'
     });
     wx.cloud.uploadFile({//先上传讲座图片
-      cloudPath: 'post/post_img/' + that.data.userInfo.username + Date.parse(new Date()) + ".png", // 上传至云端的路径 
+      cloudPath: 'post/post_img/' + that.data.userInfo._openid + Date.parse(new Date()) + ".png", // 上传至云端的路径 
       filePath:that.data.postImgPath,
       success: res => {
         // 获得图片id
