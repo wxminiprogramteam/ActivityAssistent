@@ -16,14 +16,8 @@ Page({
   },
   //后期要优化onLoad和onShow
   onLoad: function (options) {
-
-   
-
-
     //注意： 在下面获取数据库数据的api的回调函数中，this会变，因此要在此处将当前的this保存下来
     var that = this;
-
-
     //获取轮播图数据
     db.collection('post').where({
       banner: _.gt(-1)
@@ -36,28 +30,8 @@ Page({
         })
       }
     })
-    // //获取所有的文章
-    // db.collection('post').get({
-    //   success(res) {
-    //     // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-    //     // console.log(res.data);
-    //     that.setData({
-    //       posts: res.data,
-    //     })
-    //     setTimeout(function(){
-    //       that.setData({
-    //         isloading: false
-    //       })
-    //     },1000)
-    //     that.data.posts.map(function (currentValue, index, arr) {
-    //       // console.log(currentValue);
-    //       wx.setStorage({
-    //         key: currentValue._id,
-    //         data: currentValue
-    //       })
-    //     })
-    //   }
-    // })
+
+    //获取第一页的文章数据
     wx.cloud.callFunction({
       name: "pagination",
       data: {
@@ -75,6 +49,7 @@ Page({
           isloading: false
         })
       }, 1000)
+      //将文章数据保存到本地缓存中
       that.data.posts.map(function (currentValue, index, arr) {
         // console.log(currentValue);
         wx.setStorage({
@@ -86,7 +61,7 @@ Page({
 
 
   },
-
+  //点击文章简介卡片进入文章详情页
   onPostTapToDetail(event) {
     var postId = event.currentTarget.dataset.postId;
     // console.log(postId);
@@ -94,16 +69,14 @@ Page({
       url: '/pages/detail/detail?id=' + postId,
     })
   },
-
-  // target 和currentTarget
-  // target指的是当前点击的组件 和currentTarget 指的是事件捕获的组件
-  // target这里指的是image，而currentTarget指的是swiper
+  //点击轮播图进入文章详情页
   onSwiperTapToDetail: function (event) {
     var postId = event.target.dataset.postId;
     wx.navigateTo({
       url: "/pages/detail/detail?id=" + postId
     })
   },
+  //点击顶部导航栏进入搜索页
   tapToSearch: function(){
     wx.navigateTo({
       url: '/pages/search/search',
@@ -114,35 +87,39 @@ Page({
     var that = this;
     wx.showNavigationBarLoading() //在标题栏中显示加载
 
-    //获取所有的文章
-    db.collection('post').get({
-      success(res) {
-        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-        // console.log(res.data);
-        that.setData({
-          posts: res.data,
-        })
-
-        setTimeout(function () {
-          that.setData({
-            isloading: false
-          })
-          wx.hideNavigationBarLoading() //完成停止加载
-          wx.stopPullDownRefresh() //停止下拉刷新
-        }, 1000)
-        that.data.posts.map(function (currentValue, index, arr) {
-          // console.log(currentValue);
-          wx.setStorage({
-            key: currentValue._id,
-            data: currentValue
-          })
-        })
-        
+    //获取第一页的文章数据
+    wx.cloud.callFunction({
+      name: "pagination",
+      data: {
+        dbName: "post",
+        pageIndex: 0,
+        pageSize: 5
       }
+    }).then(res => {
+      console.log(res.result.data);
+      that.setData({
+        posts: res.result.data,
+      })
+      setTimeout(function () {
+        that.setData({
+          isloading: false
+        })
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+      }, 1000)
+      that.data.posts.map(function (currentValue, index, arr) {
+        // console.log(currentValue);
+        wx.setStorage({
+          key: currentValue._id,
+          data: currentValue
+        })
+      })
     })
+   
   },
-
+  //触底加载更多
   onReachBottom: function(){
+    var that = this;
     if(!this.data.hasMore){
       return;
     }
@@ -155,7 +132,7 @@ Page({
     this.setData({
       currentPageIndex: currentPageIndex
     })
-    //test: 云函数pagination
+    // 云函数pagination
     wx.cloud.callFunction({
       name: "pagination",
       data: {
@@ -171,6 +148,14 @@ Page({
         isHideLoadMore: true,
         posts: posts,
         hasMore: res.result.hasMore
+      })
+      //将文章数据保存到本地缓存中
+      that.data.posts.map(function (currentValue, index, arr) {
+        // console.log(currentValue);
+        wx.setStorage({
+          key: currentValue._id,
+          data: currentValue
+        })
       })
     })
   }

@@ -1,8 +1,10 @@
 <!--pages/mine/mine.wxml-->
 <view class="container">
+  <!--顶部欢迎栏  -->
   <view bindtap="tapHeader" class="header">
     <view class="{{(isHeaderWordHidden?'header-word-hidden':'header-word')+' '+ 'header-word'+index}}" wx:for="{{currentWelcomeWords}}" wx:key="{{item}}">{{item}}</view>
   </view>
+  <!-- end:顶部欢迎栏 -->
   <view class='main'>
     <view class='main-header'>
       <image bindtap="changeAvatar" class='main-header-avatar' src="{{isLogin?userInfo.avatarUrl : '../../images/user.png'}}"></image>
@@ -10,9 +12,6 @@
         <text class='main-header-info-name'>{{userInfo.nickname}}</text>
         <text class='main-header-info-sNumber'>学号：{{userInfo.sNumber}}</text>
       </view>
-      <!-- <button wx:else bindtap="tapLogin">
-        <text>点击登录</text>
-      </button> -->
       <!-- test wxlogin-->
       <button wx:else type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击登录</button>
      <!-- end:test wxlogin-->

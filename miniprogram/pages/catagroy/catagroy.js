@@ -1,4 +1,8 @@
 // pages/classify/classify.js
+const db = wx.cloud.database({
+  env: "activity-assistant-1065dc"
+});
+const _ = db.command;
 Page({
 
   /**
@@ -35,11 +39,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
-    const db = wx.cloud.database({
-      env: "activity-assistant-1065dc"
-    });
-    const _ = db.command;
 
     //获取 理论研究 数据
     db.collection('post').where({
@@ -95,7 +94,6 @@ Page({
     this.setData({
       tabIndex: event.currentTarget.dataset.current
     })
-
   },
   changeTab: function(event){
     console.log(event.detail.current);

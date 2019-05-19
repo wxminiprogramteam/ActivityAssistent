@@ -14,5 +14,6 @@ App({
   globalData:{
     isLogin: false,
     userInfo: {},
+    lastPage: []
   }
 })

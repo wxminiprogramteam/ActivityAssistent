@@ -30,7 +30,7 @@ Page({
           that.setData({
             isloading: false
           })
-        }, 1000)
+        }, 700)
       }
     })
 
@@ -39,8 +39,8 @@ Page({
       key: "currentUser",
       success(res) {
         console.log(res.data);
+        //如果res.data为true表示用户已经登录，则按照用户的数据来设置喜欢收藏状态
         if(res.data){
-
           that.setData({
             userInfo: res.data
           })
@@ -55,16 +55,16 @@ Page({
             }
           }
           //遍历collectionPosts
-          for (let i = 0; i < res.data.collectionPosts.length; i++) {
-            if (res.data.collectionPosts[i] == id) {
-              that.setData({
-                collectionStatus: true
-              })
+          if (res.data.collectionPosts) {
+            for (let i = 0; i < res.data.collectionPosts.length; i++) {
+              if (res.data.collectionPosts[i] == id) {
+                that.setData({
+                  collectionStatus: true
+                })
+              }
             }
           }
         }
-        
-
       }
     })
   },
@@ -81,6 +81,11 @@ Page({
         icon: "none",
         mask: true
       })
+
+      //保存当前页面信息，以便跳转登录页登录之后能够返回当前页面
+      var lastPage = ["/" + this.route + "?id=" + this.options.id,false];
+      app.globalData.lastPage = lastPage;
+
       setTimeout(function () {
         wx.switchTab({
           url: '/pages/mine/mine'
@@ -143,13 +148,6 @@ Page({
             }
           })
         }
-      })
-      // 交互反馈
-      wx.showToast({
-        title: "收藏成功",
-        duration: 500,
-        icon: "success",
-        mask: true
       })
     } else {
       //已收藏状态
@@ -225,6 +223,13 @@ Page({
         icon: "none",
         mask: true
       })
+
+
+      //保存当前页面信息，以便跳转登录页登录之后能够返回当前页面
+      var lastPage = ["/" + this.route + "?id=" + this.options.id, false];
+      app.globalData.lastPage = lastPage;
+
+
       setTimeout(function () {
         wx.switchTab({
           url: '/pages/mine/mine'
@@ -347,6 +352,10 @@ Page({
         icon: "none",
         mask: true
       })
+      //保存当前页面信息，以便跳转登录页登录之后能够返回当前页面
+      var lastPage = ["/" + this.route + "?id=" + this.options.id, false];
+      app.globalData.lastPage = lastPage;
+      
       setTimeout(function(){
         wx.switchTab({
           url: '/pages/mine/mine'

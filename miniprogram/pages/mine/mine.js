@@ -3,6 +3,7 @@ var app = getApp();
 const db = wx.cloud.database({
   env: "activity-assistant-1065dc"
 });
+var timer;
 Page({
 
   /**
@@ -12,7 +13,6 @@ Page({
     isLogin: false,
     isManager:false,
     userInfo:null,
-    // sNumber:"17051122",
     welcomeWords:[
       ['你','好','呀','~'],
       ['天','天','开','心'],
@@ -39,11 +39,6 @@ Page({
         // currentWelcomeWords: this.data.welcomeWords[n]
       })
     }, time,that)
-  },
-  tapLogin: function(e){
-    wx.navigateTo({
-      url: '/pages/login/login',
-    })
   },
   logout: function(){
     var that = this;
@@ -80,17 +75,6 @@ Page({
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths[0];
-          // //先删除原来的头像图片
-          // wx.cloud.deleteFile({
-          //   fileList: [that.data.userInfo.avatarUrl],
-          //   success: res => {
-          //     // handle success
-          //     console.log(res.fileList)
-          //   },
-          //   fail: err => {
-          //     // handle error
-          //   }
-          // })
           wx.cloud.uploadFile({
             //加时间戳，使下面的setData能刷新图片
             cloudPath: 'userAvatar/' + that.data.userInfo._openid+Date.parse(new Date())+".png", // 上传至云端的路径
@@ -208,6 +192,7 @@ Page({
                 academy: "",
                 major: "",
                 phone: "",
+                upPosts: [],
                 collectionPosts: [],
                 signUp: [],
                 history: [],
@@ -229,6 +214,7 @@ Page({
             //设置到全局变量中
             console.log("设置前:"+JSON.stringify(app.globalData.userInfo));
             app.globalData.userInfo = users[0];
+            app.globalData.isLogin = true;
             console.log("设置后:" + JSON.stringify(app.globalData.userInfo));
             wx.showToast({
               title: '登录成功！',
@@ -239,6 +225,17 @@ Page({
               userInfo: app.globalData.userInfo,
               isLogin: true
             })
+
+            //如果是从文章详情页跳过来的，就回到文章详情页
+            if(app.globalData.lastPage.length != 0){
+              let [url,isTab] = app.globalData.lastPage;
+              app.globalData.lastPage = [];
+              if (isTab) {
+                wx.switchTab({ url: url })
+              } else {
+                wx.navigateTo({ url: url })
+              }
+            }
           },
           fail: (error) => {
             console.log(error);
@@ -250,26 +247,14 @@ Page({
 
 
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    setInterval(this.tapHeader,5000);
-
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },                   
+         
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    setTimeout(this.tapHeader,1000);
+    timer = setInterval(this.tapHeader, 5000);
     var that = this;
     wx.getStorage({
       key: 'currentUser',
@@ -298,39 +283,7 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
+  onHide: function(){
+    clearInterval(timer);
+  }
 })

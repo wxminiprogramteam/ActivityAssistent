@@ -17,7 +17,7 @@
     "backgroundColor": "#2be2d0",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2be2d0",
-    "navigationBarTitleText": "活动助手",
+    "navigationBarTitleText": "讲座助手",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
