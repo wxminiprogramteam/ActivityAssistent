@@ -47,32 +47,54 @@ Page({
     var that = this;
     var params = event.detail.value;
     console.log(params);
-    var id = this.data.id;
+    var id = that.data.id;
     //校验表单
     if (!this.WxValidate.checkForm(params)) {
       const error = this.WxValidate.errorList[0]
       this.showModal(error)
       return false
     }
-
-    var temp = [params];
-    const _ = db.command;
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'signup',
-      // 传给云函数的参数
-      data: {
-        id: id,
-        data:params
-      },
-      success(res) {
-        console.log(res.result)
-      },
-      fail: console.error
+    db.collection("post").doc(id).get({
+      success(res){
+        var signupList = res.data.signup;
+        for(var idx in signupList){
+          if(signupList[idx].oppnid == that.data.userInfo._openid){
+            that.showModal({
+              msg: '请勿重复提交'
+            });
+            return false
+          }
+        }
+        params.oppnid = that.data.userInfo._openid;
+        const _ = db.command;
+        wx.cloud.callFunction({
+          // 云函数名称
+          name: 'signup',
+          // 传给云函数的参数
+          data: {
+            id: id,
+            data: params
+          },
+          success(res) {
+            console.log(res.result)
+            db.collection('user').doc(that.data.userInfo._id).update({
+              data:{
+                signUp:_.push(that.data.id)
+              },
+              success(res){
+                that.showModal({
+                  msg: '提交成功'
+                });
+              }
+            })
+            
+          },
+          fail: console.error
+        })
+      }
     })
-    this.showModal({
-      msg: '提交成功'
-    });
+   
+   
   },
   /**
    * 生命周期函数--监听页面加载

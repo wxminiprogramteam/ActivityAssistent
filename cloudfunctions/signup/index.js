@@ -17,9 +17,11 @@ const _ = db.command
 */
 exports.main = async (event, context) => {
   console.log(event.id,event.data);
+  var temp = event.data;
+  temp.time = db.serverDate();
   return await db.collection('post').doc(event.id).update({
     data:{
-      signup:_.push(event.data)
+      signup:_.push(temp)
       }
   })
 }
