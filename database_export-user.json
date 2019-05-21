@@ -6,7 +6,7 @@
   "nickname": "满座",
   "academy": "555",
   "upPosts": [],
-  "signUp": ["c0a3987b5ce36049029b4d5a13603c80"],
+  "signUp": [],
   "isManager": true,
   "_openid": "oDlIg5QWJIla118xgirxWqL_fu-o",
   "name": "lsw",
@@ -30,17 +30,17 @@
   "nickname": "潇潇易水"
 } {
   "_id": "ee3099285cde3510137c748a5ee79982",
-  "collectionPosts": ["5cc7998ee06be5ad6b82cfbe"],
+  "collectionPosts": [],
   "_openid": "oDlIg5ZkCyPwrg0u-t_4RYc2pohw",
   "isManager": true,
   "nickname": "金成",
   "academy": "计算机学院",
   "major": "软件工程",
-  "signUp": ["57896b495cdfb47800ba58f14f0b512c", "c0a3987b5ce36049029b4d5a13603c80"],
+  "signUp": [],
   "history": [],
   "sNumber": "17051122",
   "phone": "17816123519",
   "name": "金成",
   "avatarUrl": "cloud://activity-assistant-1065dc.6163-activity-assistant-1065dc-1258852361/userAvatar/oDlIg5ZkCyPwrg0u-t_4RYc2pohw1558158199000.png",
-  "upPosts": ["5cc7998ee06be5ad6b82cfb8", "5cc7998ee06be5ad6b82cfbe", "c0a3987b5cdfb4b400bb356407c63469", "6cd397ca5cdfb4ec00bcd2277e89ab5a"]
+  "upPosts": []
 }
