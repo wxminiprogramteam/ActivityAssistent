@@ -5,14 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.getStorage({
+      key: 'currentUser',
+      success: function (res) {
 
+        console.log(res)
+        that.setData({
+          userInfo: res.data,
+        })
+      },
+    })
   },
 
   /**
@@ -26,7 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      
   },
 
   /**

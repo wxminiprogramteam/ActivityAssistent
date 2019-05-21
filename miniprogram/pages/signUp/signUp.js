@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:null,
     formdata: [],
     userInfo: null,
     pickOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -35,8 +36,7 @@ Page({
         tempMessages[title] = { required: "请输入" + title}
       }
     }
-    console.log(tempRules)
-    console.log(tempMessages)
+
     const rules = tempRules
     const messages = tempMessages
     console.log(rules);
@@ -47,12 +47,29 @@ Page({
     var that = this;
     var params = event.detail.value;
     console.log(params);
+    var id = this.data.id;
     //校验表单
     if (!this.WxValidate.checkForm(params)) {
       const error = this.WxValidate.errorList[0]
       this.showModal(error)
       return false
     }
+
+    var temp = [params];
+    const _ = db.command;
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'signup',
+      // 传给云函数的参数
+      data: {
+        id: id,
+        data:params
+      },
+      success(res) {
+        console.log(res.result)
+      },
+      fail: console.error
+    })
     this.showModal({
       msg: '提交成功'
     });
@@ -63,6 +80,17 @@ Page({
   onLoad: function (options) {
    var id = options.id;
    var that = this
+   wx.getStorage({
+      key: 'currentUser',
+      success: function (res) {
+
+        console.log(res)
+        that.setData({
+          userInfo: res.data,
+          id:options.id
+        })
+      },
+    })
     db.collection('post').doc(id).get({
       success(res) {
         // res.data 包含该记录的数据
@@ -88,16 +116,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    wx.getStorage({
-      key: 'currentUser',
-      success: function (res) {
 
-        console.log(res)
-        that.setData({
-          userInfo: res.data,
-        })
-      },
-    })
   },
 
   /**

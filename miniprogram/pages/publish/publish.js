@@ -24,30 +24,35 @@ Page({
       title: '姓名',
       type: 'text',
       options: [],
+      label:'name',
       isNecessary: true
     },
     {
       title: '学号',
       type: 'text',
       options: [],
+      label: 'sNumber',
       isNecessary: true
     },
     {
       title: '学院',
       type: 'text',
       options: [],
+      label: 'academy',
       isNecessary: true
     },
     {
       title: '专业',
       type: 'text',
       options:[],
+      label: 'major',
       isNecessary: true
     },
     {
       title: '联系方式',
       type: 'text',
       options: [],
+      label: 'phone',
       isNecessary: true
     },
     ],
