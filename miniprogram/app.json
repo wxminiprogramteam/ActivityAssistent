@@ -5,6 +5,7 @@
     "pages/mine/personInfo/personInfo",
     "pages/mine/up/up",
     "pages/mine/collection/collection",
+    "pages/mine/signUpRecord/signUpRecord",
     "pages/catagroy/catagroy",
     "pages/detail/detail",
     "pages/search/search",

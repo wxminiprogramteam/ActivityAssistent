@@ -158,6 +158,20 @@ Page({
       url: '/pages/mine/collection/collection',
     })
   },
+  tapToSignUpRecord: function(){
+    if (!this.data.userInfo) {
+      wx.showToast({
+        title: "请先登录",
+        duration: 500,
+        icon: "none",
+        mask: true
+      })
+      return;
+    }
+    wx.navigateTo({
+      url: '/pages/mine/signUpRecord/signUpRecord',
+    })
+  },
   publishActivities(){
     wx.navigateTo({
       url: '../publish/publish',

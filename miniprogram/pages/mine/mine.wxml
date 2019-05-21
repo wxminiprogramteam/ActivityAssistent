@@ -32,7 +32,7 @@
         <text class='main-main-item-text'>我的收藏</text>
         <image class='main-main-item-arrow' src='../../images/arrow.png'></image>
       </view>
-      <view class='main-main-item'>
+      <view bindtap='tapToSignUpRecord' class='main-main-item'>
         <image class='main-main-item-icon' src="../../images/unorderedList.png"></image>
         <text class='main-main-item-text'>报名记录</text>
         <image class='main-main-item-arrow' src='../../images/arrow.png'></image>

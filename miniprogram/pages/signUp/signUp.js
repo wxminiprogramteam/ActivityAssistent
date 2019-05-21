@@ -54,11 +54,16 @@ Page({
       this.showModal(error)
       return false
     }
+    wx.showLoading({
+      title: '提交中',
+    })
     db.collection("post").doc(id).get({
       success(res){
+
         var signupList = res.data.signup;
         for(var idx in signupList){
           if(signupList[idx].oppnid == that.data.userInfo._openid){
+            wx.hideLoading()
             that.showModal({
               msg: '请勿重复提交'
             });
@@ -67,6 +72,8 @@ Page({
         }
         params.oppnid = that.data.userInfo._openid;
         const _ = db.command;
+
+       
         wx.cloud.callFunction({
           // 云函数名称
           name: 'signup',
@@ -77,11 +84,18 @@ Page({
           },
           success(res) {
             console.log(res.result)
+            var userInfo = that.data.userInfo;
+            userInfo.signUp.push(that.data.id);
+            wx.setStorage({
+              key: "currentUser",
+              data: userInfo,
+            })
             db.collection('user').doc(that.data.userInfo._id).update({
               data:{
                 signUp:_.push(that.data.id)
               },
               success(res){
+                wx.hideLoading()
                 that.showModal({
                   msg: '提交成功'
                 });

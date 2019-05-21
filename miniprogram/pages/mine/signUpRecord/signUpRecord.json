@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "post-card": "../../../components/post-card/post-card"
+  },
+  "navigationBarTitleText": "我的喜欢"
+}
