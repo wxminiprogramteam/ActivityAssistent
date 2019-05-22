@@ -3,6 +3,7 @@ var app = getApp();
 const db = wx.cloud.database({
   env: "activity-assistant-1065dc"
 });
+var timer;
 Page({
 
   /**
