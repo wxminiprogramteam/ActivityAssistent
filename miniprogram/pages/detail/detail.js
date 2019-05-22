@@ -18,11 +18,9 @@ Page({
     that.setData({
       postId:id
       })
-    console.log(id);
     wx.getStorage({
       key: id,
       success(res){
-        console.log(res.data);
         that.setData({
           post: res.data
         })
@@ -38,7 +36,6 @@ Page({
     wx.getStorage({
       key: "currentUser",
       success(res) {
-        console.log(res.data);
         //如果res.data为true表示用户已经登录，则按照用户的数据来设置喜欢收藏状态
         if(res.data){
           that.setData({
@@ -119,7 +116,6 @@ Page({
         data: userInfo,
       })
       //修改云数据库数据
-      console.log("修改云数据库数据:"+post.collectionNum);
       wx.cloud.callFunction({
         // 云函数名称
         name: 'updatePost',
@@ -129,24 +125,12 @@ Page({
           type: "collection",
           value: post.collectionNum
         },
-        success(res) {
-          console.log(res.result)
-        },
         fail: console.error
       })
       db.collection('user').doc(userInfo._id).update({
         // data 传入需要局部更新的数据
         data: {
           collectionPosts: userInfo.collectionPosts
-        },
-        success(res) {
-          console.log("修改云数据库数据" + res.data);
-          db.collection('user').doc(userInfo._id).get({
-
-            success(res){
-              console.log("更新后数据collection:"+JSON.stringify(res.data));
-            }
-          })
         }
       })
     } else {
@@ -186,24 +170,12 @@ Page({
           type: "collection",
           value: post.collectionNum
         },
-        success(res) {
-          console.log(res.result)
-        },
         fail: console.error
       })
       db.collection('user').doc(userInfo._id).update({
         // data 传入需要局部更新的数据
         data: {
           collectionPosts: userInfo.collectionPosts
-        },
-        success(res) {
-          console.log("修改云数据库数据" + res.data);
-          db.collection('user').doc(userInfo._id).get({
-
-            success(res) {
-              console.log("更新后数据collection:" + JSON.stringify(res.data));
-            }
-          })
         }
       })
     }
@@ -252,7 +224,6 @@ Page({
           key: post._id,
           data: post,
         })
-      // console.log(userInfo);
       if (userInfo.upPosts) {
         userInfo.upPosts.push(post._id);
       } else {
@@ -262,8 +233,6 @@ Page({
         key: "currentUser",
         data: userInfo,
       })
-      //修改云数据库数据
-      console.log("修改云数据库数据up:"+post._id+","+post.upNum);
       wx.cloud.callFunction({
         // 云函数名称
         name: 'updatePost',
@@ -273,18 +242,12 @@ Page({
           type: "up",
           value: post.upNum
         },
-        success(res) {
-          console.log(res.result)
-        },
         fail: console.error
       })
       db.collection('user').doc(userInfo._id).update({
         // data 传入需要局部更新的数据
         data: {
           upPosts: userInfo.upPosts
-        },
-        success(res) {
-          console.log("修改云数据库数据" + JSON.stringify(res));
         }
       })
     }else{
@@ -323,18 +286,12 @@ Page({
           type: "up",
           value: post.upNum
         },
-        success(res) {
-          console.log(res.result)
-        },
         fail: console.error
       })
       db.collection('user').doc(userInfo._id).update({
         // data 传入需要局部更新的数据
         data: {
           upPosts: userInfo.upPosts
-        },
-        success(res) {
-          // console.log("修改云数据库数据" + res.data);
         }
       })
     }
@@ -377,7 +334,6 @@ Page({
     })
   },
   tapShare: function(){
-    console.log("share");
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -387,7 +343,6 @@ Page({
     setTimeout(function(){
       //修改浏览数
       let post = that.data.post;
-      console.log("onShow: " + JSON.stringify(post));
       post.readingNum++;
       //更新当前页面数据
       that.setData({
@@ -408,12 +363,8 @@ Page({
           type: "reading",
           value: post.readingNum
         },
-        success(res) {
-          console.log(res.result)
-        },
         fail: console.error
       })
-      console.log(post.readingNum);
 
     },2000);
   }

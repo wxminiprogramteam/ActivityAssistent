@@ -15,7 +15,6 @@ Page({
 
   inputSearch: function(e){
     var that = this;
-    console.log(e.detail.value);
     var inputValue = e.detail.value;
     //去掉空白字符
     inputValue = inputValue.replace(/\s*/g, "");
@@ -28,7 +27,6 @@ Page({
         })
       }).get({
         success(res) {
-          console.log(JSON.stringify(res));
           var items = res.data;
           //处理过长的标题
           for(let i = 0; i < items.length; i ++){

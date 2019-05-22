@@ -14,7 +14,6 @@ Page({
     currentPageIndex: 0,
     hasMore: true
   },
-  //后期要优化onLoad和onShow
   onLoad: function (options) {
     //注意： 在下面获取数据库数据的api的回调函数中，this会变，因此要在此处将当前的this保存下来
     var that = this;
@@ -24,7 +23,6 @@ Page({
     })
     .get({
       success(res) {
-        console.log(res.data);
         that.setData({
           banners: res.data
         })
@@ -40,7 +38,6 @@ Page({
         pageSize: 5
       }
     }).then(res => {
-      console.log(res.result.data);
       that.setData({
         posts: res.result.data,
       })
@@ -96,7 +93,6 @@ Page({
         pageSize: 5
       }
     }).then(res => {
-      console.log(res.result.data);
       that.setData({
         posts: res.result.data,
       })
@@ -123,7 +119,6 @@ Page({
     if(!this.data.hasMore){
       return;
     }
-    console.log("加载更多");
     this.setData({
       isHideLoadMore: false
     })
@@ -141,7 +136,6 @@ Page({
         pageSize: 5
       }
     }).then(res => {
-      console.log(res);
       var posts = this.data.posts;
       posts = posts.concat(res.result.data); 
       this.setData({
@@ -151,7 +145,6 @@ Page({
       })
       //将文章数据保存到本地缓存中
       that.data.posts.map(function (currentValue, index, arr) {
-        // console.log(currentValue);
         wx.setStorage({
           key: currentValue._id,
           data: currentValue

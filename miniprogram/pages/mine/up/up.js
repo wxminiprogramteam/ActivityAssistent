@@ -48,7 +48,8 @@ Page({
   onShow: function (options) {
     var that = this;
     //开启欢迎文字动画
-    setInterval(this.tapHeader, 5000);
+    setTimeout(this.tapHeader, 1000);
+    timer = setInterval(this.tapHeader, 5000);
 
     //获取已喜欢的文章(暂时定为直接从缓存中获取)
     wx.getStorage({
@@ -71,46 +72,8 @@ Page({
     })
     
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    clearInterval(timer);
   }
 })

@@ -46,7 +46,6 @@ Page({
     })
     .get({
       success(res) {
-        console.log(res.data);
         that.setData({
           lilun: res.data
         })
@@ -58,7 +57,6 @@ Page({
     })
     .get({
       success(res) {
-        console.log(res.data);
         that.setData({
           zhiyuan: res.data
         })
@@ -70,7 +68,6 @@ Page({
     })
     .get({
       success(res) {
-        console.log(res.data);
         that.setData({
           tiyu: res.data
         })
@@ -82,7 +79,6 @@ Page({
     })
     .get({
       success(res) {
-        console.log(res.data);
         that.setData({
           wenhua: res.data
         })
@@ -96,14 +92,12 @@ Page({
     })
   },
   changeTab: function(event){
-    console.log(event.detail.current);
     this.setData({
       tabIndex: event.detail.current
     })
   },
   onPostTapToDetail(event) {
     var postId = event.currentTarget.dataset.postId;
-    // console.log(postId);
     wx.navigateTo({
       url: '/pages/detail/detail?id=' + postId,
     })

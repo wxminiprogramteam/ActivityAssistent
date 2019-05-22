@@ -65,7 +65,6 @@ Page({
   },
   changeAvatar: function(){
     var that = this;
-    console.log("changeAvatar");
     //如果是登录状态
     if(this.data.isLogin == true){
       wx.chooseImage({
@@ -80,33 +79,24 @@ Page({
             cloudPath: 'userAvatar/' + that.data.userInfo._openid+Date.parse(new Date())+".png", // 上传至云端的路径
             filePath: tempFilePaths, // 小程序临时文件路径
             success: res => {
-              // 返回文件 ID
-              console.log(res.fileID);
               //修改本页面的数据
               var userInfo = that.data.userInfo;
               userInfo["avatarUrl"] = res.fileID;
               that.setData({
                 userInfo: userInfo
               })
-              console.log("修改本页面数据"+that.data.userInfo.avatarUrl);
               //修改缓存
               wx.setStorage({
                 key: 'currentUser',
                 data: userInfo,
               })
-              console.log("修改缓存数据" + JSON.stringify(userInfo));
               //修改云数据库数据
-              console.log(userInfo._id);
               db.collection('user').doc(userInfo._id).update({
                 // data 传入需要局部更新的数据
                 data: {
                   avatarUrl: userInfo.avatarUrl
-                },
-                success(res) {
-                  console.log( "修改云数据库数据"+res.data);
                 }
               })
-              console.log(userInfo._id);
             },
             fail: console.error
           })
@@ -195,8 +185,6 @@ Page({
         }).get({
           success: (res) => {
             let users = res.data;  //获取到的对象数组数据
-            console.log(users[0]);
-            
             if(users.length == 0){
               var user = {
                 name: "",
