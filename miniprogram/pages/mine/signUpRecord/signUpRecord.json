@@ -2,5 +2,5 @@
   "usingComponents": {
     "post-card": "../../../components/post-card/post-card"
   },
-  "navigationBarTitleText": "我的喜欢"
+  "navigationBarTitleText": "报名记录"
 }

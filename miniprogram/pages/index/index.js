@@ -98,7 +98,9 @@ Page({
       })
       setTimeout(function () {
         that.setData({
-          isloading: false
+          isloading: false,
+          hasMore: true,
+          currentPageIndex: 0
         })
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
